@@ -1,4 +1,4 @@
-FROM php:8.0-apache
+FROM php:8.1.9-apache
 
 RUN apt update && apt install -y zlib1g-dev g++ libicu-dev zip libzip-dev zip libpq-dev \
     && docker-php-ext-install intl opcache pdo pdo_mysql \
