@@ -15,4 +15,7 @@ WORKDIR /var/www/html
 # php.ini設置
 COPY ./php.ini /usr/local/etc/php/
 
+# node
+RUN apt-get install -y nodejs npm && npm install n -g && n 16.17.0
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
