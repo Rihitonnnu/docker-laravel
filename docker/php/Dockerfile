@@ -12,4 +12,7 @@ RUN apt update && apt install -y zlib1g-dev g++ libicu-dev zip libzip-dev zip li
 
 WORKDIR /var/www/html
 
+# php.ini設置
+COPY ./php.ini /usr/local/etc/php/
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
