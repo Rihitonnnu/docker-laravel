@@ -1,26 +1,52 @@
 # docker-laravel
+
+## クローン
+```
+$ git clone -b develop git@github.com:Rihitonnnu/docker-laravel.git
+```
+
 ## セットアップ
+### ビルド
 ```
 $ docker compose build
 ```
 
-### コンテナ立ち上げ
+### envファイルコピー
 ```
-$docker compose up -d
+$ cp .env.example .env
 ```
-
-### Laravelアプリ作成
+### コンテナに入る
 ```
-#docker compose up -dの後に実行
-#コンテナに入る
 $ docker compose exec php bash
+```
 
-#Laravelインストール
-$ composer create-project laravel/laravel:^9 
+### Composerインストール
+```
+$ composer install
+```
 
-#認証キー作成
-$ php artisan key:migrate
+### 認証キー作成
+```
+$ php artisan key:generate
+```
 
-#マイグレーション
+### マイグレーション
+```
 $ php artisan migrate
+```
+
+### シード
+```
+$ php artisan migrate:fresh --seed
+```
+## tailwindCSSセットアップ
+### npmインストール
+```
+$ npm install
+```
+
+### npmビルド
+```
+$ npm run build
+```
 
