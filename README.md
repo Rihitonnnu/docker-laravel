@@ -5,10 +5,10 @@
 $ git clone -b develop git@github.com:Rihitonnnu/docker-laravel.git
 ```
 
-## セットアップ
-### ビルド
+## プロジェクトセットアップ
+### ビルドとコンテナ起動
 ```
-$ docker compose build
+$ docker compose up -d
 ```
 
 ### envファイルコピー
@@ -39,14 +39,18 @@ $ php artisan migrate
 ```
 $ php artisan migrate:fresh --seed
 ```
-## tailwindCSSセットアップ
+## Viteセットアップ
 ### npmインストール
 ```
 $ npm install
 ```
 
-### npmビルド
+### ビルド
 ```
+#開発環境用
+$ npm run dev
+
+#本番環境用
 $ npm run build
 ```
 
