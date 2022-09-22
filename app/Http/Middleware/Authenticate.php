@@ -7,7 +7,13 @@ use Illuminate\Support\Facades\Route;
 
 class Authenticate extends Middleware
 {
+    /**
+     *  @var string $userRoute
+    */
     private $userRoute='user.login';
+    /**
+     * @var string $adminRoute
+     */
     private $adminRoute='admin.login';
 
     protected function redirectTo($request)

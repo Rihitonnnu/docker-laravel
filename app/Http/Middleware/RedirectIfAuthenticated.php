@@ -9,7 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
+    /**
+     * @var string $guardUser
+     */
     public static $guardUser='users';
+    /**
+     * @var string $guardAdmin
+     */
     public static $guardAdmin='admins';
     /**
      * Handle an incoming request.
