@@ -6,21 +6,21 @@
  */
 $config = new PhpCsFixer\Config();
 return $config
-        ->setRiskyAllowed(true)
+    ->setRiskyAllowed(true)
     ->setRules([
         '@PSR12' => true, // ここにルール追記
     ])
-    ->setFinder(PhpCsFixer\Finder::create()
-        ->exclude([ // 除外ファイル
-              'vendor'
-        ])
-        ->in([
-            __DIR__ . '/app',
-            __DIR__ . '/config',
-            __DIR__ . '/database/seeders',
-            __DIR__ . '/routes',
-            __DIR__ . '/tests',
-            __DIR__ . '/resources',
-        ])
-    )
-;
+    ->setFinder(
+        PhpCsFixer\Finder::create()
+            ->exclude([ // 除外ファイル
+                'vendor'
+            ])
+            ->in([
+                __DIR__ . '/app',
+                __DIR__ . '/config',
+                __DIR__ . '/database/seeders',
+                __DIR__ . '/routes',
+                __DIR__ . '/tests',
+                __DIR__ . '/resources',
+            ])
+    );
