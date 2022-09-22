@@ -20,13 +20,13 @@ class VerifyEmailController extends Controller
         /** @var \App\Models\User $requestUser*/
         $requestUser=$request->user();
         if ($requestUser->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
+            return redirect()->intended(RouteServiceProvider::DASHBOARD.'?verified=1');
         }
 
         if ($requestUser->markEmailAsVerified()) {
             event(new Verified($request->user()));// @phpstan-ignore-line
         }
 
-        return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
+        return redirect()->intended(RouteServiceProvider::DASHBOARD.'?verified=1');
     }
 }

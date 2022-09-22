@@ -29,10 +29,10 @@ class RedirectIfAuthenticated
     {
         //認証分け
         if (Auth::guard(self::$guardUser)->check()&&$request->routeIs('user.*')) {
-            return redirect(RouteServiceProvider::HOME);
+            return redirect(RouteServiceProvider::DASHBOARD);
         }
         if (Auth::guard(self::$guardAdmin)->check()&&$request->routeIs('admin.*')) {
-            return redirect(RouteServiceProvider::ADMIN_HOME);
+            return redirect(RouteServiceProvider::ADMIN_DASHBOARD);
         }
 
         return $next($request);
