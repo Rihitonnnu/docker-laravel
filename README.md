@@ -15,10 +15,6 @@ $ docker compose up -d
 ```
 $ cp .env.example .env
 ```
-### コンテナ起動
-```
-$ docker compose up -d
-```
 
 ### コンテナに入る
 ```
