@@ -15,6 +15,11 @@ $ docker compose build
 ```
 $ cp .env.example .env
 ```
+### コンテナ起動
+```
+$ docker compose up -d
+```
+
 ### コンテナに入る
 ```
 $ docker compose exec php bash
