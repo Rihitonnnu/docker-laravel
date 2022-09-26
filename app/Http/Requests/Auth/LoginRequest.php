@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -47,9 +48,9 @@ class LoginRequest extends FormRequest
 
         //ルーティングごとに認証対象を変える処理
         if ($this->routeIs('admin.*')) {
-            $guard = 'admins';
+            $guard = RedirectIfAuthenticated::$guardAdmin;
         } else {
-            $guard = 'users';
+            $guard = RedirectIfAuthenticated::$guardUser;
         }
 
         if (!Auth::guard($guard)->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
@@ -95,6 +96,8 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey()
     {
-        return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
+        /** @var string $email */
+        $email=$this->input('email');
+        return Str::transliterate(Str::lower($email) . '|' . $this->ip());
     }
 }

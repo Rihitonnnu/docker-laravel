@@ -16,3 +16,5 @@ yarn-error.log
 /.vscode
 /docker/db/data
 /storage
+/github
+/.php-cs-fixer.cache

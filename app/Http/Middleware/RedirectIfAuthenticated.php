@@ -9,8 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
-    private const GUARD_USER='users';
-    private const GUARD_ADMIN='admins';
+    /**
+     * @var string $guardUser
+     */
+    public static $guardUser='users';
+    /**
+     * @var string $guardAdmin
+     */
+    public static $guardAdmin='admins';
     /**
      * Handle an incoming request.
      *
@@ -22,11 +28,11 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, ...$guards)
     {
         //認証分け
-        if (Auth::guard(self::GUARD_USER)->check()&&$request->routeIs('user.*')) {
-            return redirect(RouteServiceProvider::HOME);
+        if (Auth::guard(self::$guardUser)->check()&&$request->routeIs('user.*')) {
+            return redirect(RouteServiceProvider::DASHBOARD);
         }
-        if (Auth::guard(self::GUARD_ADMIN)->check()&&$request->routeIs('admin.*')) {
-            return redirect(RouteServiceProvider::ADMIN_HOME);
+        if (Auth::guard(self::$guardAdmin)->check()&&$request->routeIs('admin.*')) {
+            return redirect(RouteServiceProvider::ADMIN_DASHBOARD);
         }
 
         return $next($request);
