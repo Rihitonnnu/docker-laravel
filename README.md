@@ -31,12 +31,7 @@ $ composer install
 $ php artisan key:generate
 ```
 
-### マイグレーション
-```
-$ php artisan migrate
-```
-
-### シード
+### マイグレーション、シーディング
 ```
 $ php artisan migrate:fresh --seed
 ```
