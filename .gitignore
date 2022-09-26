@@ -1,3 +1,4 @@
+/node_modules/
 /public/build
 /public/hot
 /public/storage
@@ -14,3 +15,6 @@ yarn-error.log
 /.idea
 /.vscode
 /docker/db/data
+/storage
+/github
+/.php-cs-fixer.cache

@@ -15,4 +15,18 @@ WORKDIR /var/www/html
 # php.ini設置
 COPY ./php.ini /usr/local/etc/php/
 
+# node
+RUN apt-get install -y nodejs npm && npm install n -g && n 16.17.0
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# ユーザーIDをセット
+ARG UID=1000
+# グループIDをセット
+ARG GID=1000
+# コンテナ内に名称dockerでグループを作成
+RUN groupadd -g ${GID} docker
+# コンテナ内に名称dockerでdockerグループに所属するユーザーを作成
+RUN useradd -u ${UID} -g ${GID} -s /bin/bash -m docker
+# コンテナを実行するユーザーを指定
+USER ${UID}

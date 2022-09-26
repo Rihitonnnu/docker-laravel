@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Auth;
 class RedirectIfAuthenticated
 {
     /**
+     * @var string $guardUser
+     */
+    public static $guardUser='users';
+    /**
+     * @var string $guardAdmin
+     */
+    public static $guardAdmin='admins';
+    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -19,12 +27,12 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $guards = empty($guards) ? [null] : $guards;
-
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
-            }
+        //認証分け
+        if (Auth::guard(self::$guardUser)->check()&&$request->routeIs('user.*')) {
+            return redirect(RouteServiceProvider::DASHBOARD);
+        }
+        if (Auth::guard(self::$guardAdmin)->check()&&$request->routeIs('admin.*')) {
+            return redirect(RouteServiceProvider::ADMIN_DASHBOARD);
         }
 
         return $next($request);
