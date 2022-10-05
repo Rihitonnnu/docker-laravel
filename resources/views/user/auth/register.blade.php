@@ -9,6 +9,10 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+        <div class="text-center">
+            <h1 class="text-lg font-bold">ユーザー新規登録</h1>
+        </div>
+
         <form method="POST" action="{{ route('user.register') }}">
             @csrf
 
