@@ -52,12 +52,8 @@
                                 </table>
                                 {{$users->links()}}
                             </div>
-
                         </div>
                     </section>
-                    {{-- @foreach ($users as $user)
-                        {{$user->name}}
-                    @endforeach --}}
                 </div>
             </div>
         </div>
