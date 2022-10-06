@@ -26,12 +26,6 @@ Route::get('/', function () {
     return view('admin.welcome');
 });
 
-Route::resource('user', UserController::class)->middleware(['auth:admins']);
-
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth:admins'])->name('dashboard');
-
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
@@ -57,6 +51,12 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth:admins')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+    Route::resource('user', UserController::class);
+
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
                 ->name('verification.notice');
 
