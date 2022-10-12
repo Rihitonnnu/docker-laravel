@@ -36,13 +36,11 @@
                     autocomplete="current-password" />
             </div>
 
-            <!-- Admin Login -->
             <div class="block mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('user.login') }}">
                     ユーザーログイン
                 </a>
             </div>
-
 
             <div class="text-center mt-4">
                 <x-primary-button class="ml-3">

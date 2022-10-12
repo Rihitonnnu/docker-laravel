@@ -37,11 +37,10 @@
                                 required autocomplete="current-password" />
             </div>
 
-            <!-- Admin Login -->
             <div class="block mt-4">
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('admin.login') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('admin.login') }}">
                         管理者ログイン
-                    </a>
+                </a>
             </div>
 
             <div class="text-center mt-4 ">
