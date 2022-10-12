@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\User\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\User\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +24,10 @@ Route::middleware('guest')->group(function () {
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 });
 
-Route::middleware('auth:admins')->group(function () {
+Route::middleware('auth:users')->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        return view('user.dashboard');
     })->name('dashboard');
-
-    Route::resource('user', UserController::class);
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
