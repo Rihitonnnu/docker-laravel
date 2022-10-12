@@ -2,34 +2,14 @@ name: CI
 on:
   push:
     branches:
-      - dev/admin-user-index
+      - '**'
   pull_request:
     branches:
       - '**'
 jobs:
-  coding-standard:
+  blog-tests:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.1.9'
-        extensions: mbstring, intl
-        coverage: none
-    - name: Composer install
-      run: |
-        composer install --ignore-platform-reqs
-    - name: Dry-run php-cs-fixer
-      run: ./vendor/bin/php-cs-fixer fix --dry-run --diff --diff-format=udiff --using-cache=no . || true
-    - name: Execute php-cs-fixer
-      run: |
-        ./vendor/bin/php-cs-fixer fix --using-cache=no
-    - name: Execute phpstan
-      run: |
-        ./vendor/bin/phpstan analyse
-  test-suite:
-    runs-on: ubuntu-latest
+
     services:
       db:
         image: mysql:8.0.30
@@ -40,6 +20,7 @@ jobs:
           MYSQL_PASSWORD: docker
         ports:
           - 3306:3306
+
     steps:
     - uses: actions/checkout@v2
     - name: Setup PHP
@@ -48,9 +29,14 @@ jobs:
         php-version: '8.1.9'
         extensions: mbstring, intl
         coverage: none
+
     - name: Composer install
       run: |
         composer install --ignore-platform-reqs
+    - name: NPM Build
+      run: |
+        npm install
+        npm run build
     - name: Copy env
       run: cp .env.example .env
     - name: Encryption Key generate
@@ -63,3 +49,11 @@ jobs:
       env:
         DB_HOST: 127.0.0.1
       run: vendor/bin/phpunit
+    - name: Dry-run php-cs-fixer
+      run: ./vendor/bin/php-cs-fixer fix --dry-run --diff --diff-format=udiff --using-cache=no . || true
+    - name: Execute php-cs-fixer
+      run: |
+        ./vendor/bin/php-cs-fixer fix --using-cache=no
+    - name: Execute phpstan
+      run: |
+        ./vendor/bin/phpstan analyse
