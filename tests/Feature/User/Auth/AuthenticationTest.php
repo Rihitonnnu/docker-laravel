@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\User\Auth;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -13,21 +13,22 @@ class AuthenticationTest extends TestCase
 
     public function test_login_screen_can_be_rendered()
     {
-        $response = $this->get('/login');
+        $response = $this->get('/user/login');
 
         $response->assertStatus(200);
     }
 
     public function test_users_can_authenticate_using_the_login_screen()
     {
+        /** @var \App\Models\User $user*/
         $user = User::factory()->create();
 
-        $response = $this->post('/login', [
+        $response = $this->post('/user/login', [
             'email' => $user->email,
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticated();
+        $this->actingAs($user)->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::DASHBOARD);
     }
 
