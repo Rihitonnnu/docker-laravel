@@ -49,8 +49,6 @@ jobs:
       env:
         DB_HOST: 127.0.0.1
       run: vendor/bin/phpunit
-    - name: Dry-run php-cs-fixer
-      run: ./vendor/bin/php-cs-fixer fix --dry-run --diff --diff-format=udiff --using-cache=no . || true
     - name: Execute php-cs-fixer
       run: |
         ./vendor/bin/php-cs-fixer fix --using-cache=no
