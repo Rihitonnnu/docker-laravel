@@ -2,7 +2,7 @@
 
 ## クローン
 ```
-$ git clone -b develop git@github.com:Rihitonnnu/docker-laravel.git
+$ git clone git@github.com:Rihitonnnu/docker-laravel.git
 ```
 
 ## プロジェクトセットアップ

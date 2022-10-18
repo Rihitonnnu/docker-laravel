@@ -10,7 +10,18 @@ class UserController extends Controller
     /** @return \Illuminate\Contracts\View\View*/
     public function index()
     {
-        $users=User::paginate(20);
+        $users = User::paginate(20);
         return view('admin.user.index', compact('users'));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\View
+     * @param int $id
+     *
+     * */
+    public function show($id)
+    {
+        $user = User::find($id);
+        return view('admin.user.show', compact('user'));
     }
 }

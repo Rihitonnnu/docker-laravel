@@ -30,19 +30,14 @@
                                             <tr>
                                                 <td class="px-4 py-3 text-center w-1/4">{{ $user->id }}</td>
                                                 <td class="px-4 py-3 text-center w-1/4">{{ $user->name }}</td>
+
+                                                {{-- 詳細ボタン --}}
                                                 <td class="px-4 py-3 w-1/4">
-                                                    <div class="flex pl-4 w-full mx-auto">
-                                                        <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                                                            詳細
-                                                        </button>
-                                                    </div>
+                                                    <x-anchor-button route="{{ route('admin.user.show',['user'=>$user->id]) }}" title="詳細" color="indigo" />
                                                 </td>
+                                                {{-- 削除ボタン --}}
                                                 <td class="px-4 py-3 w-1/4">
-                                                    <div class="flex pl-4 w-full mx-auto">
-                                                        <button class="flex mx-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
-                                                            削除
-                                                        </button>
-                                                    </div>
+                                                    <x-anchor-button route="" title="削除" color="red" />
                                                 </td>
                                             </tr>
                                         </tbody>
