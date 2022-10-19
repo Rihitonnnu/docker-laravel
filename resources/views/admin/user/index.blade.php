@@ -21,23 +21,30 @@
                                             <th class="text-center px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                                                 名前
                                             </th>
-                                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
-                                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
+                                            <th class="py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
+                                            <th class="py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
+                                            <th class="py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"></th>
                                         </tr>
                                     </thead>
                                     @foreach ($users as $user)
                                         <tbody>
                                             <tr>
-                                                <td class="px-4 py-3 text-center w-1/4">{{ $user->id }}</td>
-                                                <td class="px-4 py-3 text-center w-1/4">{{ $user->name }}</td>
-
-                                                {{-- 詳細ボタン --}}
-                                                <td class="px-4 py-3 w-1/4">
-                                                    <x-anchor-button route="{{ route('admin.user.show',['user'=>$user->id]) }}" title="詳細" color="indigo" />
+                                                <td class="px-4 py-3 text-center w-1/12">{{ $user->id }}</td>
+                                                <td class="px-4 py-3 text-center w-1/6">{{ $user->name }}</td>
+                                                <td class="py-3 w-1/12">
+                                                    <div class="flex w-full mx-auto">
+                                                        <x-anchor-button route="{{ route('admin.user.show',['user'=>$user->id]) }}" title="詳細" color="indigo" />
+                                                    </div>
                                                 </td>
-                                                {{-- 削除ボタン --}}
-                                                <td class="px-4 py-3 w-1/4">
-                                                    <x-anchor-button route="" title="削除" color="red" />
+                                                <td class="py-3 w-1/12">
+                                                    <div class="flex w-full mx-auto">
+                                                        <x-anchor-button route="{{route('admin.user.edit',['user'=>$user->id])}}" title="編集" color="green" />
+                                                    </div>
+                                                </td>
+                                                <td class="py-3 w-1/12">
+                                                    <div class="flex w-full mx-auto">
+                                                        <x-anchor-button route="" title="削除" color="red" />
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>

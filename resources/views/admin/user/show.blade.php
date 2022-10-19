@@ -46,7 +46,9 @@
                     </table>
 
                     {{-- 戻るボタン --}}
-                    <x-anchor-button route="{{ route('admin.user.index') }}" title="戻る" color="indigo" />
+                    <div class="flex justify-center">
+                        <x-anchor-button route="{{ route('admin.user.index') }}" title="戻る" color="indigo" />
+                    </div>
                 </div>
             </div>
         </div>
