@@ -9,16 +9,7 @@
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    @if ($errors->any())
-                        <div class="alert alert-danger text-center">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li class="text-red-500">{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
+                    
                     <form action="{{ route('admin.user.update',['user'=>$user->id]) }}" method="POST" name="form1">
                         @csrf
                         @method('put')
@@ -29,6 +20,12 @@
                                         <div class="p-2 w-full">
                                             <div class="relative">
                                                 <label for="name" class="leading-7 text-sm text-gray-600">名前</label>
+                                                {{-- バリデーション(名前) --}}
+                                                @if ($errors->has('name'))
+                                                    <ul>
+                                                        <li class="text-red-500">{{$errors->first('name')}}</li>
+                                                    </ul>
+                                                @endif
                                                 <input value="{{$user->name}}" type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
@@ -36,6 +33,12 @@
                                         <div class="p-2 w-full">
                                             <div class="relative">
                                                 <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス</label>
+                                                {{-- バリデーション(メールアドレス) --}}
+                                                @if ($errors->has('email'))
+                                                    <ul>
+                                                        <li class="text-red-500">{{$errors->first('email')}}</li>
+                                                    </ul>
+                                                @endif
                                                 <input value="{{$user->email}}" type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
