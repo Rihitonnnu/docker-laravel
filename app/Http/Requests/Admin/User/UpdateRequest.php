@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email:filter,dns',
         ];
     }
 
@@ -34,6 +34,7 @@ class UpdateRequest extends FormRequest
         return [
             'name.required' => '名前を入力して下さい',
             'email.required' => 'メールアドレスを入力して下さい',
+            'email'=>'適切なメールアドレスを入力してください',
         ];
     }
 }
