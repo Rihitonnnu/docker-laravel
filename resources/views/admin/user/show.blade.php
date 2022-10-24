@@ -47,7 +47,7 @@
 
                     {{-- 戻るボタン --}}
                     <div class="flex justify-center">
-                        <x-anchor-button route="{{ route('admin.user.index') }}" title="戻る" color="indigo" />
+                        <x-anchor-button route="{{ route('admin.user.index') }}" title="戻る" class="bg-indigo-500 hover:bg-indigo-600" />
                     </div>
                 </div>
             </div>

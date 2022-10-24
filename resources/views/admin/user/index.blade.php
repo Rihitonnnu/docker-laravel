@@ -33,17 +33,17 @@
                                                 <td class="px-4 py-3 text-center w-1/6">{{ $user->name }}</td>
                                                 <td class="py-3 w-1/12">
                                                     <div class="flex w-full mx-auto">
-                                                        <x-anchor-button route="{{ route('admin.user.show',['user'=>$user->id]) }}" title="詳細" color="indigo" />
+                                                        <x-anchor-button route="{{ route('admin.user.show',['user'=>$user->id]) }}" title="詳細" class="bg-indigo-500 hover:bg-indigo-600" />
                                                     </div>
                                                 </td>
                                                 <td class="py-3 w-1/12">
                                                     <div class="flex w-full mx-auto">
-                                                        <x-anchor-button route="{{route('admin.user.edit',['user'=>$user->id])}}" title="編集" color="green" />
+                                                        <x-anchor-button route="{{route('admin.user.edit',['user'=>$user->id])}}" title="編集" class="bg-green-500 hover:bg-green-600" />
                                                     </div>
                                                 </td>
                                                 <td class="py-3 w-1/12">
                                                     <div class="flex w-full mx-auto">
-                                                        <x-anchor-button route="" title="削除" color="red" />
+                                                        <x-anchor-button route="" title="削除" class="bg-red-500 hover:bg-red-600" />
                                                     </div>
                                                 </td>
                                             </tr>

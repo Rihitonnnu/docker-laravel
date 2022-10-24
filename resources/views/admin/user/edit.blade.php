@@ -32,6 +32,7 @@
                                                 <input value="{{$user->name}}" type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                             </div>
                                         </div>
+
                                         <div class="p-2 w-full">
                                             <div class="relative">
                                                 <label for="email" class="leading-7 text-sm text-gray-600">メールアドレス</label>
@@ -41,10 +42,10 @@
                                         
                                         <div class="flex mx-auto w-1/2 mt-4">
                                             {{-- 戻るボタン --}}
-                                            <x-anchor-button route="{{ route('admin.user.index') }}" title="戻る" color="red" />
+                                            <x-anchor-button route="{{ route('admin.user.index') }}" title="戻る" class="bg-red-500 hover:bg-red-600" />
 
                                             {{-- 更新ボタン --}}
-                                            <x-anchor-button route="javascript:form1.submit()" title="更新する" color="indigo" />
+                                            <x-anchor-button route="javascript:form1.submit()" title="更新する" class="bg-indigo-500 hover:bg-indigo-600" />
                                         </div>
                                     </div>
                                 </div>
