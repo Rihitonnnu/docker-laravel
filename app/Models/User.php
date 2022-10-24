@@ -42,4 +42,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @param \App\Http\Requests\Admin\User\UpdateRequest $request
+     * @return \App\Models\User
+     * @param int $id
+     */
+    public function updateUser($request, $id)
+    {
+        $user = $this::find($id);
+        $user->fill($request->all())->save();
+        return $user;
+    }
 }
