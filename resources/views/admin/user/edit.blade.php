@@ -48,7 +48,7 @@
                                             <x-anchor-button route="{{ route('admin.user.index') }}" title="戻る" class="bg-red-500 hover:bg-red-600" />
 
                                             {{-- 更新ボタン --}}
-                                            <x-anchor-button route="javascript:form1.submit()" title="更新する" class="bg-indigo-500 hover:bg-indigo-600" />
+                                            <x-submit-button route="{{ route('admin.user.update',['user'=>$user->id]) }}" title="更新する" class="bg-indigo-500 hover:bg-indigo-600" />
                                         </div>
                                     </div>
                                 </div>

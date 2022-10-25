@@ -43,7 +43,7 @@
                                                 </td>
                                                 <td class="py-3 w-1/12">
                                                     <div class="flex w-full mx-auto">
-                                                        <x-anchor-button route="" title="削除" class="bg-red-500 hover:bg-red-600" />
+                                                        <x-submit-button route="" title="削除" class="bg-red-500 hover:bg-red-600" />
                                                     </div>
                                                 </td>
                                             </tr>
