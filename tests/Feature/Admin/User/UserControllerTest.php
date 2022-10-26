@@ -61,6 +61,11 @@ class UserControllerTest extends TestCase
      */
     public function ログインしていればユーザー情報の更新ができる()
     {
+        /** @var \App\Models\Admin $admin*/
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin, 'admins');
+
+        $user = User::factory()->create();
 
         //更新テスト用のデータ
         $updateData = [
@@ -69,13 +74,33 @@ class UserControllerTest extends TestCase
         ];
 
         $response = $this->put(route('admin.user.update', ['user' => $user->id]), $updateData);
-        $response->assertStatus(302); //リダイレクト
+        $response = $this->get(route('admin.user.index')); //更新後にユーザー一覧画面へリダイレクト
         $response->assertSessionHasNoErrors();
+    }
 
-        //更新テスト用データで更新が正常に行われているか確認
-        $this->assertDatabaseHas('users', [
+    /**
+     * @test
+     */
+    public function ログインしていなければ管理者のログイン画面へリダイレクトされる()
+    {
+        //一覧画面にログインなしでアクセスした場合
+        $response = $this->get(route('admin.user.index'));
+        $response->assertRedirect(route('admin.login'));
+
+        $user = User::factory()->create();
+        $response = $this->get(route('admin.user.show', ['user' => $user->id]));
+        $response->assertRedirect(route('admin.login'));
+
+        $response = $this->get(route('admin.user.edit', ['user' => $user->id]));
+        $response->assertRedirect(route('admin.login'));
+
+        //更新テスト用のデータ
+        $updateData = [
             'name' => 'test',
             'email' => 'test@gmail.com',
-        ]);
+        ];
+
+        $response = $this->put(route('admin.user.update', ['user' => $user->id]), $updateData);
+        $response->assertRedirect(route('admin.login'));
     }
 }
