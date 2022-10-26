@@ -26,7 +26,7 @@ class UserController extends Controller
      * @param int $id
      *
      * */
-    public function show($id)
+    public function show(int $id)
     {
         return view('admin.user.show', ['user' => User::find($id)]);
     }
@@ -36,7 +36,7 @@ class UserController extends Controller
      * @param int $id
      *
      * */
-    public function edit($id)
+    public function edit(int $id)
     {
         return view('admin.user.edit', ['user' => User::find($id)]);
     }
@@ -46,8 +46,7 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, int $id)
     {
-        return to_route('admin.user.index', $this->user->updateUser($request, $id));
     }
 }
