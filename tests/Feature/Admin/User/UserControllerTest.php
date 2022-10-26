@@ -9,11 +9,9 @@ use App\Models\User;
 class UserControllerTest extends TestCase
 {
     /**
-     * A basic feature test example.
-     *
-     * @return void
+     * @test
      */
-    public function test_ログインしていればユーザー一覧の表示()
+    public function ログインしていればユーザー一覧の表示()
     {
         /** @var \App\Models\Admin $admin*/
         $admin = Admin::factory()->create();
@@ -25,7 +23,10 @@ class UserControllerTest extends TestCase
         $response->assertViewIs('admin.user.index');
     }
 
-    public function test_ログインしていればユーザー詳細の表示()
+    /**
+     * @test
+     */
+    public function ログインしていればユーザー詳細の表示()
     {
         /** @var \App\Models\Admin $admin*/
         $admin = Admin::factory()->create();
@@ -38,7 +39,10 @@ class UserControllerTest extends TestCase
         $response->assertViewIs('admin.user.show');
     }
 
-    public function test_ログインしていればユーザー情報を編集し更新できる()
+    /**
+     * @test
+     */
+    public function ログインしていればユーザー情報の編集画面が表示される()
     {
         /** @var \App\Models\Admin $admin*/
         $admin = Admin::factory()->create();
@@ -50,6 +54,13 @@ class UserControllerTest extends TestCase
         $response = $this->get(route('admin.user.edit', ['user' => $user->id]));
         $response->assertOk();
         $response->assertViewIs('admin.user.edit');
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていればユーザー情報の更新ができる()
+    {
 
         //更新テスト用のデータ
         $updateData = [
