@@ -48,5 +48,10 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, int $id)
     {
+        /** @var string $userName */
+        $userName = $request->name;
+        /** @var string $userEmail */
+        $userEmail = $request->email;
+        return to_route('admin.user.index', $this->user->updateUser($userName, $userEmail, $id));
     }
 }

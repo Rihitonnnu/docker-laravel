@@ -44,14 +44,15 @@ class User extends Authenticatable
     ];
 
     /**
-     * @param \App\Http\Requests\Admin\User\UpdateRequest $request
      * @return \App\Models\User
      * @param int $id
+     * @param string $name
+     * @param string $email
      */
-    public function updateUser($request, $id)
+    public function updateUser(string $name, string $email, int $id)
     {
         $user = $this::find($id);
-        $user->fill($request->all())->save();
+        $user->fill(['name' => $name, 'email' => $email])->save();
         return $user;
     }
 }
