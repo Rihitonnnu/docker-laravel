@@ -26,6 +26,15 @@ class UserControllerTest extends TestCase
     /**
      * @test
      */
+    public function ログインしていない状態でユーザー一覧画面へアクセスする時ログイン画面へリダイレクトする()
+    {
+        $response = $this->get(route('admin.user.index'));
+        $response->assertRedirect(route('admin.login'));
+    }
+
+    /**
+     * @test
+     */
     public function ログインしていればユーザー詳細の表示()
     {
         /** @var \App\Models\Admin $admin*/
@@ -37,6 +46,16 @@ class UserControllerTest extends TestCase
 
         $response->assertOk();
         $response->assertViewIs('admin.user.show');
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態でユーザー詳細画面へアクセスする時ログイン画面へリダイレクトする()
+    {
+        $user = User::factory()->create();
+        $response = $this->get(route('admin.user.show', ['user' => $user->id]));
+        $response->assertRedirect(route('admin.login'));
     }
 
     /**
@@ -59,6 +78,16 @@ class UserControllerTest extends TestCase
     /**
      * @test
      */
+    public function ログインしていない状態でユーザー編集画面へアクセスする時ログイン画面へリダイレクトする()
+    {
+        $user = User::factory()->create();
+        $response = $this->get(route('admin.user.edit', ['user' => $user->id]));
+        $response->assertRedirect(route('admin.login'));
+    }
+
+    /**
+     * @test
+     */
     public function ログインしていればユーザー情報の更新ができる()
     {
         /** @var \App\Models\Admin $admin*/
@@ -67,13 +96,7 @@ class UserControllerTest extends TestCase
 
         $user = User::factory()->create();
 
-        //更新テスト用のデータ
-        $updateData = [
-            'name' => 'test',
-            'email' => 'test@gmail.com',
-        ];
-
-        $response = $this->put(route('admin.user.update', ['user' => $user->id]), $updateData);
+        $response = $this->put(route('admin.user.update', ['user' => $user->id]));
         $response = $this->get(route('admin.user.index')); //更新後にユーザー一覧画面へリダイレクト
         $response->assertSessionHasNoErrors();
     }
@@ -81,26 +104,10 @@ class UserControllerTest extends TestCase
     /**
      * @test
      */
-    public function ログインしていなければ管理者のログイン画面へリダイレクトされる()
+    public function ログインしていない状態で更新処理を行う時ログイン画面へリダイレクトする()
     {
-        //一覧画面にログインなしでアクセスした場合
-        $response = $this->get(route('admin.user.index'));
-        $response->assertRedirect(route('admin.login'));
-
         $user = User::factory()->create();
-        $response = $this->get(route('admin.user.show', ['user' => $user->id]));
-        $response->assertRedirect(route('admin.login'));
-
-        $response = $this->get(route('admin.user.edit', ['user' => $user->id]));
-        $response->assertRedirect(route('admin.login'));
-
-        //更新テスト用のデータ
-        $updateData = [
-            'name' => 'test',
-            'email' => 'test@gmail.com',
-        ];
-
-        $response = $this->put(route('admin.user.update', ['user' => $user->id]), $updateData);
+        $response = $this->put(route('admin.user.update', ['user' => $user->id]));
         $response->assertRedirect(route('admin.login'));
     }
 }
