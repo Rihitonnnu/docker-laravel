@@ -21,6 +21,17 @@ class UserTest extends TestCase
      */
     public function ユーザー情報の更新処理()
     {
+        $createdUser = User::factory()->create();
+
+        //更新テスト用のデータ
+        $updateData = [
+            'name' => 'test',
+            'email' => 'user@example.com',
+        ];
+
+        $updatedUser = new User();
+        $updatedUser->updateUser($updateData['name'], $updateData['email'], $createdUser->id);
+
         $this->assertDatabaseHas('users', [
             'name' => 'test',
             'email' => 'user@example.com',
