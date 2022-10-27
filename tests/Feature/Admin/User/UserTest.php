@@ -19,12 +19,11 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function データベースが更新されているかの確認()
+    public function ユーザー情報の更新処理()
     {
-        //更新テスト用データで更新が正常に行われているか確認
         $this->assertDatabaseHas('users', [
             'name' => 'test',
-            'email' => 'test@gmail.com',
+            'email' => 'user@example.com',
         ]);
     }
 }
