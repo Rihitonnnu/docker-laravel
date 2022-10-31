@@ -98,4 +98,24 @@ class UserControllerTest extends TestCase
         $response = $this->put(route('admin.user.update', ['user' => $this->user->id]));
         $response->assertRedirect(route('admin.login'));
     }
+
+    /**
+     * @test
+     */
+    public function ログインしていればユーザーの削除を行う()
+    {
+        $this->actingAs($this->admin, 'admins');
+
+        $response = $this->delete(route('admin.user.destroy', ['user' => $this->user->id]));
+        $response->assertRedirect(route('admin.user.index'));
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていなければユーザーの削除処理を行う時ログイン画面へリダイレクト()
+    {
+        $response = $this->delete(route('admin.user.destroy', ['user' => $this->user->id]));
+        $response->assertRedirect(route('admin.login'));
+    }
 }
