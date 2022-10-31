@@ -55,4 +55,14 @@ class User extends Authenticatable
         $user->fill(['name' => $name, 'email' => $email])->save();
         return $user;
     }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function deleteUser(int $id)
+    {
+        $user = $this::find($id);
+        $user->delete();
+    }
 }
