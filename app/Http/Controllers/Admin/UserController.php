@@ -61,6 +61,7 @@ class UserController extends Controller
      */
     public function destroy(int $id)
     {
-        return to_route('admin.user.index', $this->user->deleteUser($id));
+        $this->user->deleteUser($id);
+        return to_route('admin.user.index');
     }
 }
