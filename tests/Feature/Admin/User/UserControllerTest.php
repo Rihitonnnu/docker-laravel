@@ -85,9 +85,7 @@ class UserControllerTest extends TestCase
     {
         $this->actingAs($this->admin, 'admins');
 
-        $user = User::factory()->create();
-
-        $response = $this->put(route('admin.user.update', ['user' => $user->id]));
+        $response = $this->put(route('admin.user.update', ['user' => $this->user->id]));
         $response = $this->get(route('admin.user.index')); //更新後にユーザー一覧画面へリダイレクト
         $response->assertSessionHasNoErrors();
     }
