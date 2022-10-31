@@ -8,18 +8,22 @@ use App\Models\User;
 
 class UserControllerTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->admin = Admin::factory()->create();
+        $this->user = User::factory()->create();
+    }
+
     /**
      * @test
      */
     public function ログインしていればユーザー一覧の表示()
     {
-        /** @var \App\Models\Admin $admin*/
-        $admin = Admin::factory()->create();
-        $this->actingAs($admin, 'admins');
+        $this->actingAs($this->admin, 'admins');
 
         $response = $this->get(route('admin.user.index'));
-        $response->assertOk();
-
+        $response->assertStatus(200);
         $response->assertViewIs('admin.user.index');
     }
 
@@ -37,14 +41,10 @@ class UserControllerTest extends TestCase
      */
     public function ログインしていればユーザー詳細の表示()
     {
-        /** @var \App\Models\Admin $admin*/
-        $admin = Admin::factory()->create();
-        $this->actingAs($admin, 'admins');
+        $this->actingAs($this->admin, 'admins');
 
-        $user = User::factory()->create();
-        $response = $this->get(route('admin.user.show', ['user' => $user->id]));
-
-        $response->assertOk();
+        $response = $this->get(route('admin.user.show', ['user' => $this->user->id]));
+        $response->assertStatus(200);
         $response->assertViewIs('admin.user.show');
     }
 
@@ -53,8 +53,7 @@ class UserControllerTest extends TestCase
      */
     public function ログインしていない状態でユーザー詳細画面へアクセスする時ログイン画面へリダイレクトする()
     {
-        $user = User::factory()->create();
-        $response = $this->get(route('admin.user.show', ['user' => $user->id]));
+        $response = $this->get(route('admin.user.show', ['user' => $this->user->id]));
         $response->assertRedirect(route('admin.login'));
     }
 
@@ -63,15 +62,10 @@ class UserControllerTest extends TestCase
      */
     public function ログインしていればユーザー情報の編集画面が表示される()
     {
-        /** @var \App\Models\Admin $admin*/
-        $admin = Admin::factory()->create();
-        $this->actingAs($admin, 'admins');
+        $this->actingAs($this->admin, 'admins');
 
-        $user = User::factory()->create();
-
-        //編集画面
-        $response = $this->get(route('admin.user.edit', ['user' => $user->id]));
-        $response->assertOk();
+        $response = $this->get(route('admin.user.edit', ['user' => $this->user->id]));
+        $response->assertStatus(200);
         $response->assertViewIs('admin.user.edit');
     }
 
@@ -80,8 +74,7 @@ class UserControllerTest extends TestCase
      */
     public function ログインしていない状態でユーザー編集画面へアクセスする時ログイン画面へリダイレクトする()
     {
-        $user = User::factory()->create();
-        $response = $this->get(route('admin.user.edit', ['user' => $user->id]));
+        $response = $this->get(route('admin.user.edit', ['user' => $this->user->id]));
         $response->assertRedirect(route('admin.login'));
     }
 
@@ -90,9 +83,7 @@ class UserControllerTest extends TestCase
      */
     public function ログインしていればユーザー情報の更新ができる()
     {
-        /** @var \App\Models\Admin $admin*/
-        $admin = Admin::factory()->create();
-        $this->actingAs($admin, 'admins');
+        $this->actingAs($this->admin, 'admins');
 
         $user = User::factory()->create();
 
@@ -106,8 +97,7 @@ class UserControllerTest extends TestCase
      */
     public function ログインしていない状態で更新処理を行う時ログイン画面へリダイレクトする()
     {
-        $user = User::factory()->create();
-        $response = $this->put(route('admin.user.update', ['user' => $user->id]));
+        $response = $this->put(route('admin.user.update', ['user' => $this->user->id]));
         $response->assertRedirect(route('admin.login'));
     }
 }
