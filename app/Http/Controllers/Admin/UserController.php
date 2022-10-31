@@ -54,4 +54,13 @@ class UserController extends Controller
         $userEmail = $request->email;
         return to_route('admin.user.index', $this->user->updateUser($userName, $userEmail, $id));
     }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(int $id)
+    {
+        return to_route('admin.user.index', $this->user->deleteUser($id));
+    }
 }
