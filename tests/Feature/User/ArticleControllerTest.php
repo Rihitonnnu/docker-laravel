@@ -41,4 +41,13 @@ class ArticleControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewIs('user.article.index');
     }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態で投稿一覧を表示する時ログイン画面へリダイレクトする()
+    {
+        $response = $this->get(route('user.article.index'));
+        $response->assertRedirect(route('user.login'));
+    }
 }
