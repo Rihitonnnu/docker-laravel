@@ -18,7 +18,7 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(1,2),
+            'user_id' => User::factory(),
             'title' => $this->faker->realText(50),
             'content' => $this->faker->realText(400),
         ];
