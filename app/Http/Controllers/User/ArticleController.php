@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
-    protected Article $article;
+    private Article $article;
 
     public function __construct(Article $article)
     {
