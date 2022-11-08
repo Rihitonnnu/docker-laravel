@@ -8,13 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
-    private Article $article;
-
-    public function __construct(Article $article)
-    {
-        $this->article = $article;
-    }
-
     /**
      * @return \Illuminate\Contracts\View\View
      */
