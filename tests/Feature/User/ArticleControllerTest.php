@@ -41,4 +41,45 @@ class ArticleControllerTest extends TestCase
         $response = $this->get(route('user.article.index'));
         $response->assertRedirect(route('user.login'));
     }
+
+    /**
+     * @test
+     */
+    public function ログインしていれば投稿作成画面へリダイレクトする()
+    {
+        $this->actingAs($this->user, 'users');
+
+        $response = $this->get(route('user.article.create'));
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態で投稿作成画面を表示する時ログイン画面へリダイレクトする()
+    {
+        $response = $this->get(route('user.article.create'));
+        $response->assertRedirect(route('user.login'));
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていれば新規投稿内容の保存を行う()
+    {
+        $this->actingAs($this->user, 'users');
+
+        $response = $this->post(route('user.article.store'));
+        $response = $this->get(route('user.article.index'));
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態で新規投稿内容の保存を行う場合ログイン画面へリダイレクトする()
+    {
+        $response = $this->post(route('user.article.store'));
+        $response->assertRedirect(route('user.login'));
+    }
 }
