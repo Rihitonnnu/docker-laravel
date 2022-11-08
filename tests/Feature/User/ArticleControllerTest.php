@@ -21,13 +21,13 @@ class ArticleControllerTest extends TestCase
     {
         $this->actingAs($this->user, 'users');
 
-        $sameUserArticle = Article::factory()->create(['user_id' => $this->user->id]); //自分の投稿分
+        $userArticle = Article::factory()->create(['user_id' => $this->user->id]); //自分の投稿分
         $otherUserArticle = Article::factory()->create(['user_id' => User::factory()->create()->id]); //他のユーザーの投稿分
 
         $response = $this->get(route('user.article.index'));
 
         $response->assertStatus(200);
-        $response->assertSeeText($sameUserArticle->title);
+        $response->assertSeeText($userArticle->title);
         $response->assertDontSeeText($otherUserArticle->title);
 
         $response->assertViewIs('user.article.index');
