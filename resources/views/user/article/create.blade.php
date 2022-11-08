@@ -39,7 +39,7 @@
                                                         </ul>
                                                     @endif
                                                 </div>
-                                                <textarea id="content" name="content" class="w-full whitespace-pre-wrap bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('content') }}</textarea>
+                                                <textarea id="content" name="content" class="w-full h-72 whitespace-pre-wrap bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ old('content') }}</textarea>
                                             </div>
                                         </div>
                                         <div class="p-2 w-full">
