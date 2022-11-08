@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\ArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\User\Auth\RegisteredUserController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\User\Auth\RegisteredUserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
 
@@ -28,6 +30,8 @@ Route::middleware('auth:users')->group(function () {
     Route::get('/dashboard', function () {
         return view('user.dashboard');
     })->name('dashboard');
+
+    Route::resource('article', ArticleController::class);
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });

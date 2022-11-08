@@ -8,7 +8,7 @@ use App\Http\Requests\Admin\User\UpdateRequest;
 
 class UserController extends Controller
 {
-    protected User $user;
+    private User $user;
 
     public function __construct(User $user)
     {
