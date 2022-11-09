@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\Article\PostRequest;
+use App\Http\Requests\User\Article\CreateRequest;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,10 +33,10 @@ class ArticleController extends Controller
     }
 
     /**
-     * @param PostRequest $request
+     * @param CreateRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(PostRequest $request)
+    public function store(CreateRequest $request)
     {
         /** @var int $userId */
         $userId = Auth::id();
