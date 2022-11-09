@@ -26,7 +26,6 @@ class CreateRequest extends FormRequest
         return [
             'title' => 'required|max:50',
             'content' => 'required|max:1000',
-            'created_at' => 'nullable|date',
         ];
     }
 
@@ -34,7 +33,6 @@ class CreateRequest extends FormRequest
     {
         return [
             'title.required' => 'タイトルを入力して下さい',
-            'title.unique' => 'タイトルが重複しているので変更してください',
             'title.max' => 'タイトルは50文字以内で入力してください',
             'content.required' => '本文を入力して下さい',
             'content.max' => '本文は1000文字以内で入力してください',
