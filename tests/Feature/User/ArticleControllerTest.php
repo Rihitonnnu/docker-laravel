@@ -69,7 +69,10 @@ class ArticleControllerTest extends TestCase
     {
         $this->actingAs($this->user, 'users');
 
-        $response = $this->from(route('user.article.index'))->post(route('user.article.store'));
+        $response = $this->post(route('user.article.store', [
+            'title' => "ほげほげ",
+            'content' => "ふがふが",
+        ]));
         $response->assertRedirect(route('user.article.index'));
     }
 
