@@ -11,15 +11,15 @@ class ArticleTest extends TestCase
     protected function setup(): void
     {
         parent::setUp();
-        $this->user = User::factory()->create(['id' => 1]);
+        $this->user = User::factory()->create();
     }
 
     public function test_storeArticle()
     {
-        $storeArticle = (new Article())->storeArticle($this->user->id, 'ほげほげ', 'ふがふが');
+        $article = (new Article())->storeArticle($this->user->id, 'ほげほげ', 'ふがふが');
 
-        $this->assertEquals($this->user->id, $storeArticle->user_id);
-        $this->assertEquals('ほげほげ', $storeArticle->title);
-        $this->assertEquals('ふがふが', $storeArticle->content);
+        $this->assertEquals($this->user->id, $article->user_id);
+        $this->assertEquals('ほげほげ', $article->title);
+        $this->assertEquals('ふがふが', $article->content);
     }
 }
