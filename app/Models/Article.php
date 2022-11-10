@@ -21,6 +21,22 @@ class Article extends Model
         'content',
     ];
 
+    /**
+     * @return \App\Models\Article
+     * @param int $userId
+     * @param string $title
+     * @param string $content
+     */
+    public function storeArticle(int $userId, string $title, string $content)
+    {
+        $article = $this->create([
+            'user_id' => $userId,
+            'title' => $title,
+            'content' => $content,
+        ]);
+        return $article;
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
