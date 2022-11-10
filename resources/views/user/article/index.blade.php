@@ -13,7 +13,7 @@
                     @foreach($articles as $article)
                     <section class="text-gray-600 body-font overflow-hidden border-b-2 border-gray-200">
                         <div class="container px-10 pt-8 mx-auto">
-                            <a href="" class="-my-8">
+                            <a href="{{ route('user.article.show',['article'=>$article->id]) }}" class="-my-8">
                                 <div class="py-4 flex flex-wrap md:flex-nowrap">
                                     <div class="md:flex-grow">
                                         <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $article->title }}</h2>
