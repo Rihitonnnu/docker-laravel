@@ -48,4 +48,13 @@ class ArticleController extends Controller
         $this->article->storeArticle($userId, $title, $content);
         return to_route('user.article.index');
     }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show(int $id)
+    {
+        return view('user.article.show', ['article' => Article::find($id),]);
+    }
 }
