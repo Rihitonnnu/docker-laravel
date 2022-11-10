@@ -18,7 +18,7 @@
                                         <p class="text-sm mt-1">投稿日時 {{ $article->created_at }}</p>
                                         <div class="mt-4">
                                             {{-- 改行した状態で内容を表示するためエスケープ処理を無効化 --}}
-                                            <p class="leading-relaxed text-md mb-4">{!!nl2br($article->content) !!}</p>
+                                            <p class="leading-relaxed text-md mb-4">{!!nl2br(htmlspecialchars($article->content)) !!}</p>
                                         </div>
                                     </div>
                                 </div>
