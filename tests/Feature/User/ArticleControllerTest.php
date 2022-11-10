@@ -84,4 +84,34 @@ class ArticleControllerTest extends TestCase
         $response = $this->post(route('user.article.store'));
         $response->assertRedirect(route('user.login'));
     }
+
+    /**
+     * @test
+     */
+    public function ログインしていれば自分の投稿の詳細を表示する()
+    {
+        $this->actingAs($this->user, 'users');
+
+        $article = Article::factory()->create(['user_id' => $this->user->id]); //自分の投稿、表示する
+        $otherArticle = Article::factory()->create(['user_id' => $this->user->id]); //自分の投稿、表示しない
+        $otherUserArticle = Article::factory()->create(); //他の人の投稿、表示しない
+
+        $response = $this->get(route('user.article.show', ['article' => $article->id]));
+
+        $response->assertSeeText($article->title);
+        $response->assertDontSeeText($otherArticle);
+        $response->assertDontSeeText($otherUserArticle);
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態で投稿詳細を表示する場合ログイン画面へリダイレクトする()
+    {
+        $article = Article::factory()->create(['user_id' => $this->user->id]);
+
+        $response = $this->get(route('user.article.show', ['article' => $article->id]));
+        $response->assertRedirect(route('user.login'));
+    }
 }
