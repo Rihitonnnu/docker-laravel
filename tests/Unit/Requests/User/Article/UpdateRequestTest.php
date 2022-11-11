@@ -10,7 +10,7 @@ use Tests\TestCase;
 class UpdateRequestTest extends TestCase
 {
     /**
-     * 投稿作成のテストデータ
+     * 投稿編集のテストデータ
      * @return array
      */
     public function dataProviderUpdate()
@@ -61,7 +61,7 @@ class UpdateRequestTest extends TestCase
     }
 
     /**
-     * 新規投稿の作成
+     * 投稿編集
      * @test
      * @param array $data
      * @param boolean $expect
