@@ -82,4 +82,14 @@ class ArticleController extends Controller
         $this->article->updateArticle($title, $content, $id);
         return to_route('user.article.index');
     }
+
+    /**
+     * @param integer $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(int $id)
+    {
+        $this->article->destroyArticle($id);
+        return to_route('user.article.index');
+    }
 }
