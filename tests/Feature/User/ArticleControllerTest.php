@@ -109,9 +109,7 @@ class ArticleControllerTest extends TestCase
      */
     public function ログインしていない状態で投稿詳細を表示する場合ログイン画面へリダイレクトする()
     {
-        $article = Article::factory()->create(['user_id' => $this->user->id]);
-
-        $response = $this->get(route('user.article.show', ['article' => $article->id]));
+        $response = $this->get(route('user.article.show', ['article' => Article::factory()->create()->id]));
         $response->assertRedirect(route('user.login'));
     }
 
@@ -136,9 +134,7 @@ class ArticleControllerTest extends TestCase
      */
     public function ログインしていない状態で投稿編集画面へアクセスした時ログイン画面へリダイレクトする()
     {
-        $article = Article::factory()->create(); //表示する投稿
-
-        $response = $this->get(route('user.article.edit', ['article' => $article->id]));
+        $response = $this->get(route('user.article.edit', ['article' => Article::factory()->create()->id]));
         $response->assertRedirect(route('user.login'));
     }
 
