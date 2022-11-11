@@ -27,13 +27,7 @@
                                                         </ul>
                                                     @endif
                                                 </div>
-                                                @if(count($errors)>0)
-                                                    {{-- バリデーションがかかった場合は前に入力した内容を表示 --}}
-                                                    <x-text-input id="title" name="title" value="{{ old('title') }}" />
-                                                @else
-                                                    {{-- バリデーションがかかっていない時はコントローラから渡された内容を表示 --}}
-                                                    <x-text-input id="title" name="title" value="{{ $article->title }}" />
-                                                @endif
+                                                <x-text-input id="title" name="title" value="{{ old('title') ?? $article->title }}" />
                                             </div>
                                         </div>
                                         <div class="p-2 w-full">
@@ -47,13 +41,7 @@
                                                         </ul>
                                                     @endif
                                                 </div>
-                                                @if(count($errors)>0)
-                                                    {{-- バリデーションがかかった場合は前に入力した内容を表示 --}}
-                                                    <x-textarea id="content" name="content" content="{{ old('content') }}" />
-                                                @else
-                                                    {{-- バリデーションがかかっていない時はコントローラから渡された内容を表示 --}}
-                                                    <x-textarea id="content" name="content" content="{{ $article->content }}" />
-                                                @endif
+                                                <x-textarea id="content" name="content" content="{{ old('content') ?? $article->content }}" />
                                             </div>
                                         </div>
                                         <div class="p-2 w-full">
