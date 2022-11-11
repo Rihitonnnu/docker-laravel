@@ -37,6 +37,22 @@ class Article extends Model
         return $article;
     }
 
+    /**
+     * @param string $title
+     * @param string $content
+     * @param integer $id
+     * @return \App\Models\Article
+     */
+    public function updateArticle(string $title, string $content, int $id)
+    {
+        $article = $this::find($id);
+        $article->fill([
+            'title' => $title,
+            'content' => $content,
+        ])->save();
+        return $article;
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

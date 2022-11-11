@@ -22,4 +22,12 @@ class ArticleTest extends TestCase
         $this->assertEquals('ほげほげ', $article->title);
         $this->assertEquals('ふがふが', $article->content);
     }
+
+    public function test_updateArticle()
+    {
+        $updateArticle = (new Article())->updateArticle('タイトル', '本文', Article::factory()->create()->id);
+
+        $this->assertEquals('タイトル', $updateArticle->title);
+        $this->assertEquals('本文', $updateArticle->content);
+    }
 }

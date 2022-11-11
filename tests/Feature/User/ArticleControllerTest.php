@@ -109,9 +109,60 @@ class ArticleControllerTest extends TestCase
      */
     public function ログインしていない状態で投稿詳細を表示する場合ログイン画面へリダイレクトする()
     {
-        $article = Article::factory()->create(['user_id' => $this->user->id]);
+        $response = $this->get(route('user.article.show', ['article' => Article::factory()->create()->id]));
+        $response->assertRedirect(route('user.login'));
+    }
 
-        $response = $this->get(route('user.article.show', ['article' => $article->id]));
+    /**
+     * @test
+     */
+    public function ログインしていれば投稿編集画面を表示する()
+    {
+        $this->actingAs($this->user, 'users');
+
+        $article = Article::factory()->create(); //表示する投稿
+        $otherArticle = Article::factory()->create(); //表示しない投稿
+
+        $response = $this->get(route('user.article.edit', ['article' => $article->id]));
+        $response->assertSeeText($article->content);
+        $response->assertDontSeeText($otherArticle->content);
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態で投稿編集画面へアクセスした時ログイン画面へリダイレクトする()
+    {
+        $response = $this->get(route('user.article.edit', ['article' => Article::factory()->create()->id]));
+        $response->assertRedirect(route('user.login'));
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていれば投稿内容を更新する()
+    {
+        $this->actingAs($this->user, 'users');
+
+        $response = $this->put(route('user.article.update', [
+            'title' => 'タイトル',
+            'content' => '本文',
+            'article' => Article::factory()->create()->id,
+        ]));
+        $response->assertRedirect(route('user.article.index'));
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態で投稿内容を更新した時ログイン画面へリダイレクトする()
+    {
+        $response = $this->put(route('user.article.update', [
+            'title' => 'タイトル',
+            'content' => '本文',
+            'article' => Article::factory()->create()->id,
+        ]));
         $response->assertRedirect(route('user.login'));
     }
 }

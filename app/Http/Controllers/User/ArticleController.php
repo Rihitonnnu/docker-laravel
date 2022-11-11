@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Article\CreateRequest;
+use App\Http\Requests\User\Article\UpdateRequest;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,5 +57,29 @@ class ArticleController extends Controller
     public function show(int $id)
     {
         return view('user.article.show', ['article' => Article::find($id),]);
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function edit(int $id)
+    {
+        return view('user.article.edit', ['article' => Article::find($id)]);
+    }
+
+    /**
+     * @param UpdateRequest $request
+     * @param integer $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UpdateRequest $request, int $id)
+    {
+        /** @var string $title */
+        $title = $request->title;
+        /** @var string $content */
+        $content = $request->content;
+        $this->article->updateArticle($title, $content, $id);
+        return to_route('user.article.index');
     }
 }

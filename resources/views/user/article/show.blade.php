@@ -18,15 +18,20 @@
                                         <p class="text-sm mt-1">投稿日時 {{ $article->created_at }}</p>
                                         <div class="mt-4">
                                             {{-- 改行した状態で内容を表示するためエスケープ処理を無効化 --}}
-                                            <p class="leading-relaxed text-md mb-4">{!!nl2br(htmlspecialchars($article->content)) !!}</p>
+                                            <p class="leading-relaxed text-md mb-4">{!! nl2br(htmlspecialchars($article->content)) !!}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <div class="mx-auto w-32 mt-6">
-                        <x-anchor-button route="{{ route('user.article.index') }}" title="一覧へ戻る" class="bg-indigo-500 hover:bg-indigo-600" />
+                    <div class="flex justify-center">
+                        <div class="m-2 w-32 mt-6">
+                            <x-anchor-button route="{{ route('user.article.edit', ['article' => $article->id]) }}" title="編集する" class="bg-orange-500 hover:bg-orange-600" />
+                        </div>
+                        <div class="m-2 w-32 mt-6">
+                            <x-anchor-button route="{{ route('user.article.index') }}" title="一覧へ戻る" class="bg-indigo-500 hover:bg-indigo-600" />
+                        </div>
                     </div>
                 </div>
             </div>
