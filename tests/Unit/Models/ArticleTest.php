@@ -30,4 +30,12 @@ class ArticleTest extends TestCase
         $this->assertEquals('タイトル', $updateArticle->title);
         $this->assertEquals('本文', $updateArticle->content);
     }
+
+    public function test_destroyArticle()
+    {
+        $article = Article::factory()->create();
+        (new Article())->destroyArticle($article->id);
+
+        $this->assertSoftDeleted($article);
+    }
 }
