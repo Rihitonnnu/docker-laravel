@@ -165,4 +165,24 @@ class ArticleControllerTest extends TestCase
         ]));
         $response->assertRedirect(route('user.login'));
     }
+
+    /**
+     * @test
+     */
+    public function ログインしていれば投稿を削除する()
+    {
+        $this->actingAs($this->user, 'users');
+
+        $response = $this->delete(route('user.article.destroy', ['article' => Article::factory()->create()->id]));
+        $response->assertRedirect(route('user.article.index'));
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態で投稿を削除した時ログイン画面へリダイレクトする()
+    {
+        $response = $this->delete(route('user.article.destroy', ['article' => Article::factory()->create()->id]));
+        $response->assertRedirect(route('user.login'));
+    }
 }
