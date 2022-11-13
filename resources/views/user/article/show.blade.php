@@ -16,13 +16,6 @@
                                     <div class="w-full sm:pl-8 border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
                                         <div class="flex">
                                             <h1 class="font-bold text-3xl text-black">{{ $article->title }}</h1>
-                                            <form onsubmit="return confirm('投稿を削除してもよろしいですか？')" action="{{ route('user.article.destroy',['article'=>$article->id]) }}" method="post" >
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit">
-                                                    <x-delete-icon class="mt-1 ml-2"/>
-                                                </button>
-                                            </form>
                                         </div>
                                         <p class="text-sm mt-1">投稿日時 {{ $article->created_at }}</p>
                                         <div class="mt-4">

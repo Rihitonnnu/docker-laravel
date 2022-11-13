@@ -14,14 +14,21 @@
                     <section class="text-gray-600 body-font overflow-hidden border-b-2 border-gray-200">
                         <div class="container px-10 pt-8 mx-auto">
                             <a href="{{ route('user.article.show',['article'=>$article->id]) }}" class="-my-8">
-                                <div class="py-4 flex flex-wrap md:flex-nowrap">
-                                    <div class="md:flex-grow">
-                                        <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $article->title }}</h2>
-                                        <p class="leading-relaxed">{{Str::limit($article->content, 200, '...') }}</p>
+                                <div class="pt-2 pb-9 flex items-center w-full">
+                                    <div class="md:flex-grow w-11/12">
+                                        <h2 class="text-2xl font-medium text-gray-900 title-font">{{ $article->title }}</h2>
+                                        <span class="text-gray-500 text-sm">投稿日 {{\Carbon\Carbon::parse($article->created_at)}}</span>
+                                        <p class="leading-relaxed mt-4">{{Str::limit($article->content, 200, '...') }}</p>
                                     </div>
-                                </div>
-                                <div class="md:w-64 text-center ml-auto mb-6 flex">
-                                    <span class="mt-1 text-gray-500 text-md ml-auto">投稿日 {{\Carbon\Carbon::parse($article->created_at)}}</span>
+                                    <div class="w-1/12 text-center">
+                                        <form onsubmit="return confirm('投稿を削除してもよろしいですか？')" action="{{ route('user.article.destroy',['article'=>$article->id]) }}" method="post" >
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit">
+                                                <x-delete-icon class=""/>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </a>
                         </div>
