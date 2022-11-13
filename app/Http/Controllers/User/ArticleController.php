@@ -56,7 +56,11 @@ class ArticleController extends Controller
      */
     public function show(int $id)
     {
-        return view('user.article.show', ['article' => Article::find($id),]);
+        $article = Article::find($id);
+
+        $this->authorize('show', $article); //取得した投稿がユーザーが表示可能かどうか判定
+
+        return view('user.article.show', ['article' => $article]);
     }
 
     /**
@@ -65,7 +69,11 @@ class ArticleController extends Controller
      */
     public function edit(int $id)
     {
-        return view('user.article.edit', ['article' => Article::find($id)]);
+        $article = Article::find($id);
+
+        $this->authorize('edit', $article); //投稿が編集可能か判定
+
+        return view('user.article.edit', ['article' => $article]);
     }
 
     /**
@@ -75,6 +83,8 @@ class ArticleController extends Controller
      */
     public function update(UpdateRequest $request, int $id)
     {
+        $this->authorize('update', Article::find($id)); //投稿が上書き保存可能か判定
+
         /** @var string $title */
         $title = $request->title;
         /** @var string $content */
@@ -89,6 +99,8 @@ class ArticleController extends Controller
      */
     public function destroy(int $id)
     {
+        $this->authorize('delete', Article::find($id)); //投稿が削除可能か判定
+
         $this->article->destroyArticle($id);
         return to_route('user.article.index');
     }
