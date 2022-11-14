@@ -17,8 +17,10 @@
         <div class="min-h-screen bg-gray-100">
             @if (auth('admins')->user())
                 @include('layouts.admin-navigation')
-            @else
+            @elseif(auth('users')->user())
                 @include('layouts.user-navigation')
+            @else
+                @include('layouts.visitor-navigation')
             @endif
 
             <!-- Page Heading -->
