@@ -109,7 +109,7 @@ class ArticleControllerTest extends TestCase
      */
     public function ログインしていない状態で投稿詳細を表示する場合ログイン画面へリダイレクトする()
     {
-        $response = $this->get(route('user.article.show', ['article' => Article::factory()->create()->id]));
+        $response = $this->get(route('user.article.show', ['article' => Article::factory()->create(['user_id' => $this->user->id])->id]));
         $response->assertRedirect(route('user.login'));
     }
 
@@ -120,7 +120,7 @@ class ArticleControllerTest extends TestCase
     {
         $this->actingAs($this->user, 'users');
 
-        $article = Article::factory()->create(); //表示する投稿
+        $article = Article::factory()->create(['user_id' => $this->user->id]); //表示する投稿
         $otherArticle = Article::factory()->create(); //表示しない投稿
 
         $response = $this->get(route('user.article.edit', ['article' => $article->id]));
@@ -134,7 +134,7 @@ class ArticleControllerTest extends TestCase
      */
     public function ログインしていない状態で投稿編集画面へアクセスした時ログイン画面へリダイレクトする()
     {
-        $response = $this->get(route('user.article.edit', ['article' => Article::factory()->create()->id]));
+        $response = $this->get(route('user.article.edit', ['article' => Article::factory()->create(['user_id' => $this->user->id])->id]));
         $response->assertRedirect(route('user.login'));
     }
 
@@ -148,7 +148,7 @@ class ArticleControllerTest extends TestCase
         $response = $this->put(route('user.article.update', [
             'title' => 'タイトル',
             'content' => '本文',
-            'article' => Article::factory()->create()->id,
+            'article' => Article::factory()->create(['user_id' => $this->user->id])->id,
         ]));
         $response->assertRedirect(route('user.article.index'));
     }
@@ -161,8 +161,28 @@ class ArticleControllerTest extends TestCase
         $response = $this->put(route('user.article.update', [
             'title' => 'タイトル',
             'content' => '本文',
-            'article' => Article::factory()->create()->id,
+            'article' => Article::factory()->create(['user_id' => $this->user->id])->id,
         ]));
+        $response->assertRedirect(route('user.login'));
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていれば自分の投稿を削除する()
+    {
+        $this->actingAs($this->user, 'users');
+
+        $response = $this->delete(route('user.article.destroy', ['article' => Article::factory()->create(['user_id' => $this->user->id])->id]));
+        $response->assertRedirect(route('user.article.index'));
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態で投稿を削除した時ログイン画面へリダイレクトする()
+    {
+        $response = $this->delete(route('user.article.destroy', ['article' => Article::factory()->create()->id]));
         $response->assertRedirect(route('user.login'));
     }
 }

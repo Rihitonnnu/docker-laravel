@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +53,15 @@ class Article extends Model
             'content' => $content,
         ])->save();
         return $article;
+    }
+
+    /**
+     * @param \App\Models\Article $article
+     * @return void
+     */
+    public function destroyArticle(Article $article)
+    {
+        $article->delete();
     }
 
     public function user(): BelongsTo

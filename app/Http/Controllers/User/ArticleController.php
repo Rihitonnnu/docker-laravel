@@ -15,6 +15,7 @@ class ArticleController extends Controller
     public function __construct(Article $article)
     {
         $this->article = $article;
+        $this->authorizeResource(Article::class, 'article');
     }
 
     /**
@@ -51,35 +52,45 @@ class ArticleController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param \App\Models\Article $article
      * @return \Illuminate\Contracts\View\View
      */
-    public function show(int $id)
+    public function show(Article $article)
     {
-        return view('user.article.show', ['article' => Article::find($id),]);
+        return view('user.article.show', ['article' => $article]);
     }
 
     /**
-     * @param int $id
+     * @param \App\Models\Article $article
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit(int $id)
+    public function edit(Article $article)
     {
-        return view('user.article.edit', ['article' => Article::find($id)]);
+        return view('user.article.edit', ['article' => $article]);
     }
 
     /**
      * @param UpdateRequest $request
-     * @param integer $id
+     * @param \App\Models\Article $article
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, int $id)
+    public function update(UpdateRequest $request, Article $article)
     {
         /** @var string $title */
         $title = $request->title;
         /** @var string $content */
         $content = $request->content;
-        $this->article->updateArticle($title, $content, $id);
+        $this->article->updateArticle($title, $content, $article->id);
+        return to_route('user.article.index');
+    }
+
+    /**
+     * @param \App\Models\Article $article
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Article $article)
+    {
+        $this->article->destroyArticle($article);
         return to_route('user.article.index');
     }
 }
