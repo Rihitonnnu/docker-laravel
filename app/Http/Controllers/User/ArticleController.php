@@ -15,6 +15,7 @@ class ArticleController extends Controller
     public function __construct(Article $article)
     {
         $this->article = $article;
+        $this->authorizeResource(Article::class, 'article');
     }
 
     /**
@@ -51,57 +52,45 @@ class ArticleController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param \App\Models\Article $article
      * @return \Illuminate\Contracts\View\View
      */
-    public function show(int $id)
+    public function show(Article $article)
     {
-        $article = Article::find($id);
-
-        $this->authorize('show', $article); //取得した投稿がユーザーが表示可能かどうか判定
-
         return view('user.article.show', ['article' => $article]);
     }
 
     /**
-     * @param int $id
+     * @param \App\Models\Article $article
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit(int $id)
+    public function edit(Article $article)
     {
-        $article = Article::find($id);
-
-        $this->authorize('edit', $article); //投稿が編集可能か判定
-
         return view('user.article.edit', ['article' => $article]);
     }
 
     /**
      * @param UpdateRequest $request
-     * @param integer $id
+     * @param \App\Models\Article $article
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, int $id)
+    public function update(UpdateRequest $request, Article $article)
     {
-        $this->authorize('update', Article::find($id)); //投稿が上書き保存可能か判定
-
         /** @var string $title */
         $title = $request->title;
         /** @var string $content */
         $content = $request->content;
-        $this->article->updateArticle($title, $content, $id);
+        $this->article->updateArticle($title, $content, $article->id);
         return to_route('user.article.index');
     }
 
     /**
-     * @param integer $id
+     * @param \App\Models\Article $article
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(Article $article)
     {
-        $this->authorize('delete', Article::find($id)); //投稿が削除可能か判定
-
-        $this->article->destroyArticle($id);
+        $this->article->destroyArticle($article);
         return to_route('user.article.index');
     }
 }
