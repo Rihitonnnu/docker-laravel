@@ -11,13 +11,11 @@ class ArticlePolicy
     use HandlesAuthorization;
 
     /**
-     * @param User $user
-     * @param Article $article
      * @return boolean
      */
-    public function show(User $user, Article $article)
+    public function viewAny()
     {
-        return $user->id == $article->user_id;
+        return true;
     }
 
     /**
@@ -25,9 +23,17 @@ class ArticlePolicy
      * @param Article $article
      * @return boolean
      */
-    public function edit(User $user, Article $article)
+    public function view(User $user, Article $article)
     {
         return $user->id == $article->user_id;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function create()
+    {
+        return true;
     }
 
     /**
