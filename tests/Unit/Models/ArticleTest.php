@@ -34,7 +34,7 @@ class ArticleTest extends TestCase
     public function test_destroyArticle()
     {
         $article = Article::factory()->create();
-        (new Article())->destroyArticle($article->id);
+        (new Article())->destroyArticle($article);
 
         $this->assertSoftDeleted($article);
     }
