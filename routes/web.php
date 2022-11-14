@@ -14,10 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return to_route('visitor.article.index');
-});
-
-Route::prefix('visitor')->as('visitor.')->group(function () {
-    Route::resource('article', ArticleController::class);
-});
+Route::get('/', [ArticleController::class,'index'])->name('visitor.article.index');
