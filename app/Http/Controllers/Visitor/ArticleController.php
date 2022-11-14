@@ -12,6 +12,6 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('visitor.index', ['articles' => Article::select('id', 'user_id', 'title', 'content', 'created_at')->orderBy('created_at', 'desc')->paginate(20)]);
+        return view('visitor.index', ['articles' => Article::orderBy('created_at', 'desc')->paginate(20)]);
     }
 }
