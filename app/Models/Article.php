@@ -56,12 +56,12 @@ class Article extends Model
     }
 
     /**
-     * @param integer $id
+     * @param \App\Models\Article $article
      * @return void
      */
-    public function destroyArticle(int $id)
+    public function destroyArticle(Article $article)
     {
-        $this::find($id)->delete();
+        $article->delete();
     }
 
     public function user(): BelongsTo
