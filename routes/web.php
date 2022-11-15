@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Visitor\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//アクセスしたらユーザーのログイン画面へリダイレクトするように仮設定
-Route::get('/', function () {
-    return to_route('user.login');
-});
+Route::get('/', [ArticleController::class,'index'])->name('visitor.article.index');
