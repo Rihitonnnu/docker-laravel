@@ -12,7 +12,7 @@
                     @foreach($articles as $article)
                     <section class="text-gray-600 body-font overflow-hidden border-b-2 border-gray-200">
                         <div class="container px-10 pt-8 mx-auto">
-                            <a href="" class="-my-8">
+                            <a href="{{ route('visitor.article.show',['article'=>$article->id]) }}" class="-my-8">
                                 <div class="pt-2 pb-9 flex items-center w-full">
                                     <div class="md:flex-grow w-11/12">
                                         <div class="mb-2">
