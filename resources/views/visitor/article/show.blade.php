@@ -15,7 +15,7 @@
                                 <div class="flex flex-col sm:flex-row mt-3">
                                     <div class="w-full sm:pl-8 border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
                                         <div class="mb-2">
-                                            <p>{{ $userName }}</p>
+                                            <p>{{ $article->user->name }}</p>
                                         </div>
                                         <h1 class="font-bold text-3xl text-black">{{ $article->title }}</h1>
                                         <p class="text-sm mt-1">投稿日時 {{ $article->created_at }}</p>
