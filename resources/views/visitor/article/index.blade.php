@@ -16,7 +16,7 @@
                                 <div class="pt-2 pb-9 flex items-center w-full">
                                     <div class="md:flex-grow w-11/12">
                                         <div class="mb-2">
-                                            <p>{{ App\Models\User::find($article->user_id)->name }}</p>
+                                            <p>{{ $article->user->name }}</p>
                                         </div>
                                         <h2 class="text-2xl font-medium text-gray-900 title-font">{{ $article->title }}</h2>
                                         <span class="text-gray-500 text-sm">投稿日 {{\Carbon\Carbon::parse($article->created_at)}}</span>
