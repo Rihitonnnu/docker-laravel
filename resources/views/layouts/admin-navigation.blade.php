@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
                         ユーザー一覧
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.article.index')" :active="request()->routeIs('admin.article.index')">
+                        ユーザー投稿一覧
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -78,6 +81,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
                 ユーザー一覧
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.article.index')" :active="request()->routeIs('admin.article.index')">
+                ユーザー投稿一覧
             </x-responsive-nav-link>
         </div>
 
