@@ -23,11 +23,8 @@ class ArticleController extends Controller
     public function show(int $id)
     {
         /** @var \App\Models\Article $article */
-        $article = Article::find($id);
+        $article = Article::with('user')->where('id', $id)->first();
 
-        /** @var \App\Models\User $user */
-        $user = User::find($article->user_id);
-
-        return view('visitor.article.show', ['article' => $article, 'userName' => $user->name]); //表示する投稿とその投稿の作成者の名前を取得
+        return view('visitor.article.show', ['article' => $article]);
     }
 }
