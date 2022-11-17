@@ -22,6 +22,15 @@
                                         <span class="text-gray-500 text-sm">投稿日 {{\Carbon\Carbon::parse($article->created_at)}}</span>
                                         <p class="leading-relaxed mt-4">{{Str::limit($article->content, 200, '...') }}</p>
                                     </div>
+                                    <div class="w-1/12 text-center pl-8">
+                                        <form onsubmit="return confirm('投稿を削除してもよろしいですか？')" action="" method="post" >
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit">
+                                                <x-delete-icon class=""/>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </a>
                         </div>
