@@ -12,7 +12,7 @@
                     @foreach($articles as $article)
                     <section class="text-gray-600 body-font overflow-hidden border-b-2 border-gray-200">
                         <div class="container px-10 pt-8 mx-auto">
-                            <a href="{{ route('visitor.article.show',['article'=>$article->id]) }}" class="-my-8">
+                            <a href="" class="-my-8">
                                 <div class="pt-2 pb-9 flex items-center w-full">
                                     <div class="md:flex-grow w-11/12">
                                         <div class="mb-2">
@@ -21,6 +21,15 @@
                                         <h2 class="text-2xl font-medium text-gray-900 title-font">{{ $article->title }}</h2>
                                         <span class="text-gray-500 text-sm">投稿日 {{\Carbon\Carbon::parse($article->created_at)}}</span>
                                         <p class="leading-relaxed mt-4">{{Str::limit($article->content, 200, '...') }}</p>
+                                    </div>
+                                    <div class="w-1/12 text-center pl-8">
+                                        <form onsubmit="return confirm('投稿を削除してもよろしいですか？')" action="" method="post" >
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit">
+                                                <x-delete-icon class=""/>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </a>

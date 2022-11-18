@@ -14,14 +14,17 @@ class ArticleControllerTest extends TestCase
     }
 
     /**
+     * 投稿一覧表示で表示したい投稿のタイトルと投稿者名が表示されているか
      * @test
      */
     public function 投稿一覧を表示()
     {
         $article = Article::factory()->create();
+
         $response = $this->get(route('visitor.article.index'));
 
         $response->assertSeeText($article->title);
+        $response->assertSeeText($article->user->name);
         $response->assertStatus(200);
     }
 
