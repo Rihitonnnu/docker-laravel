@@ -19,8 +19,7 @@ class ArticleControllerTest extends TestCase
      */
     public function 投稿一覧を表示()
     {
-        $user=User::factory()->create();
-        $article = Article::factory()->create(['user_id'=>$user->id]);
+        $article = Article::factory()->create();
 
         $response = $this->get(route('visitor.article.index'));
 

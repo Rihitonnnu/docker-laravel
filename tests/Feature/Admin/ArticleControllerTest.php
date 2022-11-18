@@ -23,8 +23,7 @@ class ArticleControllerTest extends TestCase
     {
         $this->actingAs($this->admin, 'admins');
 
-        $user = User::factory()->create();
-        $article = Article::factory()->create(['user_id' => $user->id]);
+        $article = Article::factory()->create();
 
         $response = $this->get(route('admin.article.index'));
 
