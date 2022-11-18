@@ -40,4 +40,34 @@ class ArticleControllerTest extends TestCase
         $response = $this->get(route('admin.article.index'));
         $response->assertRedirect(route('admin.login'));
     }
+
+    /**
+     * 表示したい投稿・投稿者名が表示されているか、他の投稿が表示されていないか
+     * @test
+     */
+    public function ログインしていればユーザーの投稿詳細表示()
+    {
+        $this->actingAs($this->admin, 'admins');
+
+        $article = Article::factory()->create();
+        $otherArticle = Article::factory()->create();
+
+        $response = $this->get(route('admin.article.show', ['article' => $article->id]));
+
+        $response->assertSeeText($article->title);
+        $response->assertSeeText($article->user->name);
+
+        $response->assertDontSeeText($otherArticle->title);
+        $response->assertDontSeeText($otherArticle->user->name);
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態で投稿詳細画面にアクセスした時ログイン画面へリダイレクトする()
+    {
+        $response = $this->get(route('admin.article.show', ['article' => Article::factory()->create()->id]));
+        $response->assertRedirect(route('admin.login'));
+    }
 }
