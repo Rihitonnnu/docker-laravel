@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin;
 
 use Tests\TestCase;
 use App\Models\Article;
-use App\Models\User;
 use App\Models\Admin;
 
 class ArticleControllerTest extends TestCase
@@ -68,6 +67,27 @@ class ArticleControllerTest extends TestCase
     public function ログインしていない状態で投稿詳細画面にアクセスした時ログイン画面へリダイレクトする()
     {
         $response = $this->get(route('admin.article.show', ['article' => Article::factory()->create()->id]));
+        $response->assertRedirect(route('admin.login'));
+    }
+
+    /**
+     * 投稿を削除して投稿一覧画面へ遷移されるか
+     * @test
+     */
+    public function ログインしていれば投稿を削除()
+    {
+        $this->actingAs($this->admin, 'admins');
+
+        $response = $this->delete(route('admin.article.destroy', ['article' => Article::factory()->create()->id]));
+        $response->assertRedirect(route('admin.article.index'));
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態で投稿を削除した場合ログイン画面へリダイレクトする()
+    {
+        $response = $this->delete(route('admin.article.destroy', ['article' => Article::factory()->create()->id]));
         $response->assertRedirect(route('admin.login'));
     }
 }
