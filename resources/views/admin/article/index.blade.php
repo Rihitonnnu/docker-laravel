@@ -23,7 +23,7 @@
                                         <p class="leading-relaxed mt-4">{{Str::limit($article->content, 200, '...') }}</p>
                                     </div>
                                     <div class="w-1/12 text-center pl-8">
-                                        <form onsubmit="return confirm('投稿を削除してもよろしいですか？')" action="" method="post" >
+                                        <form onsubmit="return confirm('投稿を削除してもよろしいですか？')" action="{{ route('admin.article.destroy',['article'=>$article->id]) }}" method="post" >
                                             @csrf
                                             @method('delete')
                                             <button type="submit">
