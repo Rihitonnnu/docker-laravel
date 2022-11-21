@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('admin.article.index')" :active="request()->routeIs('admin.article.index')">
                         投稿一覧
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.tag.index')">
+                        タグ
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -84,6 +87,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.article.index')" :active="request()->routeIs('admin.article.index')">
                 投稿一覧
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.tag.index')">
+                タグ
             </x-responsive-nav-link>
         </div>
 
