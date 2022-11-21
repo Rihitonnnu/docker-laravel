@@ -7,6 +7,13 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
+    private Article $article;
+
+    public function __construct(Article $article)
+    {
+        $this->article = $article;
+    }
+
     /**
      * 投稿一覧を表示
      * @return \Illuminate\Contracts\View\View
@@ -27,5 +34,18 @@ class ArticleController extends Controller
         $article = Article::with('user')->where('id', $id)->first();
 
         return view('admin.article.show', ['article' => $article]);
+    }
+
+    /**
+     * @param integer $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(int $id)
+    {
+        /** @var \App\Models\Article */
+        $article = Article::find($id);
+        $this->article->destroyArticle($article);
+
+        return to_route('admin.article.index');
     }
 }
