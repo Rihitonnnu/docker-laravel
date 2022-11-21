@@ -19,4 +19,16 @@ class Tag extends Model
     protected $fillable = [
         'name',
     ];
+
+    /**
+     * @param string $name
+     * @return \App\Models\Tag
+     */
+    public function storeTag(string $name)
+    {
+        $tag = $this->create([
+            'name' => $name,
+        ]);
+        return $tag;
+    }
 }
