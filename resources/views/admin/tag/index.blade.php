@@ -13,24 +13,37 @@
                         <h1 class="text-2xl font-bold">タグ登録</h1>
                     </div>
 
-                    <section class="text-gray-600 body-font relative mb-8">
-                        <div class="container px-5 pt-3 mx-auto">
-                            <div class="w-5/6 mx-auto">
-                                <div class="flex flex-wrap -m-2">
-                                    <div class="p-2 w-1/3">
-                                        <div class="relative">
-                                            <label for="name" class="leading-7 text-sm text-gray-600">タグ名</label>
-                                            <input type="text" id="name" name="name"
-                                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    <form action="{{ route('admin.tag.store') }}" method="POST">
+                        @csrf
+                        <section class="text-gray-600 body-font relative mb-8">
+                            <div class="container px-5 pt-3 mx-auto">
+                                <div class="w-5/6 mx-auto">
+                                    <div class="flex flex-wrap -m-2">
+                                        <div class="p-2 w-1/3">
+                                            <div class="relative">
+                                                <div class="flex">
+                                                    <label for="name"
+                                                        class="leading-7 text-sm text-gray-600">タグ名</label>
+                                                    @if ($errors->has('name'))
+                                                        <ul>
+                                                            <li class="text-red-500 ml-4 mt-1 text-sm">
+                                                                {{ $errors->first('name') }}</li>
+                                                        </ul>
+                                                    @endif
+                                                </div>
+                                                <input type="text" id="name" name="name"
+                                                    class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="p-2 w-1/6 mt-7">
-                                        <x-submit-button title="登録" class="bg-indigo-500 hover:bg-indigo-600" />
+                                        <div class="p-2 w-1/6 mt-7">
+                                            <x-submit-button id="tag_add" title="登録"
+                                                class="bg-indigo-500 hover:bg-indigo-600" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </form>
 
                     <div class="px-3 mx-auto w-5/6 mt-8 mb-5">
                         <h1 class="text-2xl font-bold">タグ一覧</h1>
@@ -70,6 +83,9 @@
                                         </tbody>
                                     @endforeach
                                 </table>
+                                <div class="mt-5">
+                                    {{ $tags->links() }}
+                                </div>
                             </div>
                         </div>
                     </section>
