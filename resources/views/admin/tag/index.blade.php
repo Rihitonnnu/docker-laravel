@@ -76,10 +76,14 @@
                                                         route="{{ route('admin.tag.edit', ['tag' => $tag->id]) }}"
                                                         title="編集" class="bg-green-500 hover:bg-green-600 w-5/6" />
                                                 </td>
-                                                <td class="py-3 w-1/12">
-                                                    <x-submit-button title="削除"
-                                                        class="bg-red-500 hover:bg-red-600 w-5/6" />
-                                                </td>
+                                                <form onsubmit="return confirm('タグを削除してもよろしいですか？')" action="{{ route('admin.tag.destroy',['tag'=>$tag->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <td class="py-3 w-1/12">
+                                                        <x-submit-button title="削除"
+                                                            class="bg-red-500 hover:bg-red-600 w-5/6" />
+                                                    </td>
+                                                </form>
                                             </tr>
                                         </tbody>
                                     @endforeach
