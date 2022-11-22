@@ -18,8 +18,8 @@
                         <section class="text-gray-600 body-font relative mb-8">
                             <div class="container px-5 pt-3 mx-auto">
                                 <div class="w-5/6 mx-auto">
-                                    <div class="flex flex-wrap -m-2">
-                                        <div class="p-2 w-1/3">
+                                    <div class="flex flex-wrap justify-center -m-2">
+                                        <div class="p-2 w-1/2">
                                             <div class="relative">
                                                 <div class="flex">
                                                     <label for="name"
@@ -56,28 +56,29 @@
                                     <thead>
                                         <tr>
                                             <th
-                                                class="text-center w-1/2 px-2 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+                                                class="text-center w-1/3 px-2 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl rounded-bl">
                                                 タグ名
                                             </th>
                                             <th
-                                                class="w-1/6 px-2 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                class="w-1/12 px-2 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">
                                             </th>
                                             <th
-                                                class="w-1/6 px-2 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                                                class="w-1/12 px-2 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200">
                                             </th>
                                         </tr>
                                     </thead>
                                     @foreach ($tags as $tag)
-                                        <tbody class="mt-2">
+                                        <tbody class="mt-2 bg-slate-100">
                                             <tr>
                                                 <td class="px-2 py-3 text-center text-sm">{{ $tag->name }}</td>
-                                                <td class="py-3 w-1/6">
-                                                    <x-anchor-button route="" title="編集"
-                                                        class="bg-green-500 hover:bg-green-600 w-2/3" />
+                                                <td class="py-3 w-1/12">
+                                                    <x-anchor-button
+                                                        route="{{ route('admin.tag.edit', ['tag' => $tag->id]) }}"
+                                                        title="編集" class="bg-green-500 hover:bg-green-600 w-5/6" />
                                                 </td>
-                                                <td class="py-3 w-1/6">
+                                                <td class="py-3 w-1/12">
                                                     <x-submit-button title="削除"
-                                                        class="bg-red-500 hover:bg-red-600" />
+                                                        class="bg-red-500 hover:bg-red-600 w-5/6" />
                                                 </td>
                                             </tr>
                                         </tbody>
