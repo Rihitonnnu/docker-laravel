@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Article;
+use App\Models\Tag;
 use Tests\TestCase;
 use App\Models\User;
 
@@ -68,10 +69,12 @@ class ArticleControllerTest extends TestCase
     public function ログインしていれば新規投稿内容の保存を行う()
     {
         $this->actingAs($this->user, 'users');
+        $tag = Tag::factory()->create();
 
         $response = $this->post(route('user.article.store', [
             'title' => "ほげほげ",
             'content' => "ふがふが",
+            'tag' => [0 => $tag->id],
         ]));
         $response->assertRedirect(route('user.article.index'));
     }
