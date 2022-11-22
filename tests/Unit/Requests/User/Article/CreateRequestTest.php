@@ -20,6 +20,7 @@ class CreateRequestTest extends TestCase
                 'data' => [
                     'title' => 'ほげほげ',
                     'content' => 'ふがふが',
+                    'tag' => [0 => 1],
                 ],
                 true,
                 'errors' => [],
@@ -34,12 +35,16 @@ class CreateRequestTest extends TestCase
                     'content' => [
                         '本文を入力して下さい'
                     ],
+                    'tag' => [
+                        'タグは1つ以上選択して下さい'
+                    ]
                 ]
             ],
             '文字数上限' => [
                 'data' => [
                     'title' => Factory::create()->realText(100),
                     'content' => Factory::create()->realText(1200),
+                    'tag' => [0 => 1],
                 ],
                 false,
                 'errors' => [
@@ -51,6 +56,27 @@ class CreateRequestTest extends TestCase
                     ],
                 ]
             ],
+            'タグ数上限' => [
+                'data' => [
+                    'title' => 'ほげほげ',
+                    'content' => 'ふがふが',
+                    'tag' => [
+                        0 => 1,
+                        1 => 2,
+                        2 => 3,
+                        3 => 4,
+                        4 => 5,
+                        5 => 6,
+                    ],
+                ],
+                false,
+                'errors' => [
+                    'tag' => [
+                        'タグ数は5つ以下にして下さい'
+                    ]
+                ]
+            ]
+
         ];
     }
 
