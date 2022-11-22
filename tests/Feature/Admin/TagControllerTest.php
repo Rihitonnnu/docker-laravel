@@ -107,4 +107,24 @@ class TagControllerTest extends TestCase
         ]));
         $response->assertRedirect(route('admin.login'));
     }
+
+    /**
+     * @test
+     */
+    public function ログインしていればタグを削除する()
+    {
+        $this->actingAs($this->admin, 'admins');
+
+        $response = $this->delete(route('admin.tag.destroy', ['tag' => $this->tag->id]));
+        $response->assertRedirect(route('admin.tag.index'));
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態でタグを削除した時ログイン画面へリダイレクトする()
+    {
+        $response = $this->delete(route('admin.tag.destroy', ['tag' => $this->tag->id]));
+        $response->assertRedirect(route('admin.login'));
+    }
 }
