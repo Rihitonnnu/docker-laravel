@@ -60,4 +60,51 @@ class TagControllerTest extends TestCase
         ]));
         $response->assertRedirect(route('admin.login'));
     }
+
+    /**
+     * @test
+     */
+    public function ログインしていればタグ編集画面を表示する()
+    {
+        $this->actingAs($this->admin, 'admins');
+
+        $response = $this->get(route('admin.tag.edit', ['tag' => $this->tag]));
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態でタグ編集画面へアクセスした時ログイン画面へリダイレクトされる()
+    {
+        $response = $this->get(route('admin.tag.edit', ['tag' => $this->tag->id]));
+        $response->assertRedirect(route('admin.login'));
+    }
+
+    /**
+     * 更新した後タグ一覧画面へリダイレクトしているか
+     * @test
+     */
+    public function ログインしていればタグ内容を更新する()
+    {
+        $this->actingAs($this->admin, 'admins');
+
+        $response = $this->put(route('admin.tag.update', [
+            'name' => 'ほげほげ',
+            'tag' => $this->tag->id,
+        ]));
+        $response->assertRedirect(route('admin.tag.index'));
+    }
+
+    /**
+     * @test
+     */
+    public function ログインしていない状態でタグ内容を更新した時ログイン画面へリダイレクトする()
+    {
+        $response = $this->put(route('admin.tag.update', [
+            'name' => 'ほげほげ',
+            'tag' => $this->tag->id,
+        ]));
+        $response->assertRedirect(route('admin.login'));
+    }
 }
