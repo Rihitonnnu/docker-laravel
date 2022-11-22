@@ -29,14 +29,16 @@ class Article extends Model
      * @param int $userId
      * @param string $title
      * @param string $content
+     * @param array $tag
      */
-    public function storeArticle(int $userId, string $title, string $content)
+    public function storeArticle(int $userId, string $title, string $content, array $tag)
     {
         $article = $this->create([
             'user_id' => $userId,
             'title' => $title,
             'content' => $content,
         ]);
+        $article->tags()->sync($tag);
         return $article;
     }
 
