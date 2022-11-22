@@ -59,4 +59,14 @@ class TagController extends Controller
         $this->tag->updateTag($name, $id);
         return to_route('admin.tag.index');
     }
+
+    /**
+     * @param integer $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(int $id)
+    {
+        $this->tag->destroyTag($id);
+        return to_route('admin.tag.index');
+    }
 }

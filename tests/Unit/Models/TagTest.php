@@ -28,4 +28,11 @@ class TagTest extends TestCase
 
         $this->assertEquals('ふがふが', $updateTag->name);
     }
+
+    public function test_destroyTag()
+    {
+        (new Tag())->destroyTag($this->tag->id);
+
+        $this->assertSoftDeleted($this->tag);
+    }
 }

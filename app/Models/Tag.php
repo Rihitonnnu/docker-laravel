@@ -46,4 +46,13 @@ class Tag extends Model
         ])->save();
         return $tag;
     }
+
+    /**
+     * @param integer $id
+     * @return void
+     */
+    public function destroyTag(int $id)
+    {
+        $this::find($id)->delete();
+    }
 }
