@@ -20,6 +20,11 @@ class Tag extends Model
     protected $fillable = [
         'name',
     ];
+    
+    public function articles(): BelongsToMany
+    {
+        return $this->belongsToMany(Article::class);
+    }
 
     /**
      * @param string $name
@@ -55,10 +60,5 @@ class Tag extends Model
     public function destroyTag(int $id)
     {
         $this::find($id)->delete();
-    }
-
-    public function articles(): BelongsToMany
-    {
-        return $this->belongsToMany(Article::class);
     }
 }

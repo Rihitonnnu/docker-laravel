@@ -23,6 +23,16 @@ class Article extends Model
         'title',
         'content',
     ];
+    
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 
     /**
      * @return \App\Models\Article
@@ -65,15 +75,5 @@ class Article extends Model
     public function destroyArticle(Article $article)
     {
         $article->delete();
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function tags(): BelongsToMany
-    {
-        return $this->belongsToMany(Tag::class);
     }
 }
