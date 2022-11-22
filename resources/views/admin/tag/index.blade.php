@@ -53,7 +53,7 @@
                         <div class="container px-3 pb-12 w-full">
                             <div class="w-2/3 overflow-auto mx-auto">
                                 <table class="table-auto w-full text-left whitespace-no-wrap">
-                                    <thead id="all_show_result">
+                                    <thead>
                                         <tr>
                                             <th
                                                 class="text-center w-1/2 px-2 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
