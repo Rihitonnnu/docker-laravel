@@ -31,4 +31,19 @@ class Tag extends Model
         ]);
         return $tag;
     }
+
+    /**
+     * @param string $name
+     * @param integer $id
+     * @return \App\Models\Tag
+     */
+    public function updateTag(string $name, int $id)
+    {
+        $tag = $this::find($id);
+
+        $tag->fill([
+            'name' => $name,
+        ])->save();
+        return $tag;
+    }
 }
