@@ -21,17 +21,17 @@
                                                 <div class="flex">
                                                     <label for="tag"
                                                         class="leading-7 text-sm text-gray-600">タグ選択</label>
-                                                    @if ($errors->has('tag'))
+                                                    @if ($errors->has('tags'))
                                                         <ul>
                                                             <li class="text-red-500 ml-4 mt-1 text-sm">
-                                                                {{ $errors->first('tag') }}</li>
+                                                                {{ $errors->first('tags') }}</li>
                                                         </ul>
                                                     @endif
                                                 </div>
                                                 <div class="flex flex-wrap">
                                                     @foreach ($tags as $tag)
                                                         <x-tag-checkbox name="{{ $tag->name }}"
-                                                            value="{{ $tag->id }}" />
+                                                            id="{{ $tag->id }}" />
                                                     @endforeach
                                                 </div>
                                             </div>
