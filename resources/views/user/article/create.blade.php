@@ -64,7 +64,8 @@
                                                         </ul>
                                                     @endif
                                                 </div>
-                                                <x-textarea id="content" name="content">{{ old('content') }}
+                                                <x-textarea id="content" name="content"
+                                                    content="{{ old('content') }}">
                                                 </x-textarea>
                                             </div>
                                         </div>
