@@ -74,7 +74,7 @@ class ArticleControllerTest extends TestCase
         $response = $this->post(route('user.article.store', [
             'title' => "ほげほげ",
             'content' => "ふがふが",
-            'tag' => [0 => $tag->id],
+            'tags' => [$tag->id],
         ]));
         $response->assertRedirect(route('user.article.index'));
     }
