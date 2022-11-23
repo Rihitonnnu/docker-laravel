@@ -1,10 +1,8 @@
 <?php
 
-use App\Models\Article;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Psy\CodeCleaner\FunctionReturnInWriteContextPass;
 
 return new class extends Migration
 {
@@ -19,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('article_id')->constrained()->onDelete('cascade');
             $table->foreignId('tag_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
