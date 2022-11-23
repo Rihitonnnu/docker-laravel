@@ -23,7 +23,7 @@ class Article extends Model
         'title',
         'content',
     ];
-    
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -39,16 +39,16 @@ class Article extends Model
      * @param int $userId
      * @param string $title
      * @param string $content
-     * @param array $tag
+     * @param array $tags
      */
-    public function storeArticle(int $userId, string $title, string $content, array $tag)
+    public function storeArticle(int $userId, string $title, string $content, array $tags)
     {
         $article = $this->create([
             'user_id' => $userId,
             'title' => $title,
             'content' => $content,
         ]);
-        $article->tags()->sync($tag);
+        $article->tags()->sync($tags);
         return $article;
     }
 
