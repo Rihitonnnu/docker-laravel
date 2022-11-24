@@ -18,7 +18,7 @@ class ArticleTest extends TestCase
     public function test_storeArticle()
     {
         $tag = Tag::factory()->create();
-        $article = (new Article())->storeArticle($this->user->id, 'ほげほげ', 'ふがふが', [0 => $tag->id]);
+        $article = (new Article())->storeArticle($this->user->id, 'ほげほげ', 'ふがふが', [$tag->id]);
 
         $this->assertEquals($this->user->id, $article->user_id);
         $this->assertEquals('ほげほげ', $article->title);
