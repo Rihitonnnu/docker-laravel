@@ -20,6 +20,7 @@ class CreateRequestTest extends TestCase
                 'data' => [
                     'title' => 'ほげほげ',
                     'content' => 'ふがふが',
+                    'tags' => [1],
                 ],
                 true,
                 'errors' => [],
@@ -34,12 +35,16 @@ class CreateRequestTest extends TestCase
                     'content' => [
                         '本文を入力して下さい'
                     ],
+                    'tags' => [
+                        'タグは1つ以上選択して下さい'
+                    ]
                 ]
             ],
             '文字数上限' => [
                 'data' => [
                     'title' => Factory::create()->realText(100),
                     'content' => Factory::create()->realText(1200),
+                    'tags' => [1],
                 ],
                 false,
                 'errors' => [
@@ -51,6 +56,20 @@ class CreateRequestTest extends TestCase
                     ],
                 ]
             ],
+            'タグ数上限' => [
+                'data' => [
+                    'title' => 'ほげほげ',
+                    'content' => 'ふがふが',
+                    'tags' => [1, 2, 3, 4, 5, 6],
+                ],
+                false,
+                'errors' => [
+                    'tags' => [
+                        'タグ数は5つ以下にして下さい'
+                    ]
+                ]
+            ]
+
         ];
     }
 
@@ -72,7 +91,7 @@ class CreateRequestTest extends TestCase
     public function testCreateValidation(array $data, bool $expect, array $errors): void
     {
         $validator = Validator::make($data, $this->createRequest->rules(), $this->createRequest->messages());
-        $this->assertEquals($expect, $validator->passes()); //バリデーションのチェックが通ったかどうか
-        $this->assertEquals($errors, $validator->errors()->getMessages()); //エラーメッセージテスト
+        $this->assertEquals($expect, $validator->passes());
+        $this->assertEquals($errors, $validator->errors()->getMessages());
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model
@@ -23,19 +24,31 @@ class Article extends Model
         'content',
     ];
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
     /**
      * @return \App\Models\Article
      * @param int $userId
      * @param string $title
      * @param string $content
+     * @param array $tags
      */
-    public function storeArticle(int $userId, string $title, string $content)
+    public function storeArticle(int $userId, string $title, string $content, array $tags)
     {
         $article = $this->create([
             'user_id' => $userId,
             'title' => $title,
             'content' => $content,
         ]);
+        $article->tags()->sync($tags);
         return $article;
     }
 
@@ -62,10 +75,5 @@ class Article extends Model
     public function destroyArticle(Article $article)
     {
         $article->delete();
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
     }
 }

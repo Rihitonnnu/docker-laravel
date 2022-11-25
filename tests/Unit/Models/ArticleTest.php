@@ -3,6 +3,7 @@
 namespace Tests\Unit\Models;
 
 use App\Models\Article;
+use App\Models\Tag;
 use App\Models\User;
 use Tests\TestCase;
 
@@ -16,11 +17,13 @@ class ArticleTest extends TestCase
 
     public function test_storeArticle()
     {
-        $article = (new Article())->storeArticle($this->user->id, 'ほげほげ', 'ふがふが');
+        $tag = Tag::factory()->create();
+        $article = (new Article())->storeArticle($this->user->id, 'ほげほげ', 'ふがふが', [$tag->id]);
 
         $this->assertEquals($this->user->id, $article->user_id);
         $this->assertEquals('ほげほげ', $article->title);
         $this->assertEquals('ふがふが', $article->content);
+        $this->assertEquals($tag->id, $article->tags->first()->id);
     }
 
     public function test_updateArticle()

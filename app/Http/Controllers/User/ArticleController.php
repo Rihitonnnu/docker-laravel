@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Article\CreateRequest;
 use App\Http\Requests\User\Article\UpdateRequest;
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
@@ -31,7 +32,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('user.article.create');
+        return view('user.article.create', ['tags' => Tag::all()]);
     }
 
     /**
@@ -46,8 +47,11 @@ class ArticleController extends Controller
         $title = $request->title;
         /** @var string $content */
         $content = $request->content;
+        /** @var array $tags */
+        $tags = $request->tags;
 
-        $this->article->storeArticle($userId, $title, $content);
+        $this->article->storeArticle($userId, $title, $content, $tags);
+
         return to_route('user.article.index');
     }
 
