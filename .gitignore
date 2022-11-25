@@ -6,6 +6,7 @@
 /vendor
 .env
 .env.backup
+.env.testing
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -15,6 +16,7 @@ yarn-error.log
 /.idea
 /.vscode
 /docker/db/data
+/docker/db-test/data
 /storage
 /github
 /.php-cs-fixer.cache
