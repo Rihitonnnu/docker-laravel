@@ -35,6 +35,19 @@ $ php artisan key:generate
 ```
 $ php artisan migrate:fresh --seed
 ```
+
+## テスト環境セットアップ
+
+### .env.testingコピー
+```
+$ cp .env.testing.example .env.testing
+```
+
+### 認証キー作成
+```
+$ php artisan key:generate --env=testing
+```
+
 ## Viteセットアップ
 ### npmインストール
 ```
@@ -49,4 +62,5 @@ $ npm run dev
 #本番環境用
 $ npm run build
 ```
+
 
