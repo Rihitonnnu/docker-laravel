@@ -17,23 +17,6 @@ services:
       - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
-  
-  db-test:
-    image: mysql:8.0.30
-    container_name: db-test
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: docker-database
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: docker
-      TZ: 'Asia/Tokyo'
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - ./docker/db-test/data:/var/lib/mysql
-      - ./docker/db-test/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./docker/db-test/sql:/docker-entrypoint-initdb.d
-    ports:
-      - 3000:3306
 
   php:
     container_name: php
