@@ -38,14 +38,33 @@ $ php artisan migrate:fresh --seed
 
 ## テスト環境セットアップ
 
-### .env.testingコピー
+### キャッシュクリア
 ```
-$ cp .env.testing.example .env.testing
+$ php artisan config:clear
 ```
-
 ### 認証キー作成
 ```
 $ php artisan key:generate --env=testing
+```
+### dbコンテナに入る
+```
+$ docker compose exec db bash
+```
+### MySQLにログイン(rootユーザー)
+```
+$ mysql -u root -p
+```
+### テスト用のデータベース作成
+```
+create database docker_laravel_test;
+```
+### DBの権限設定(pwはdocker)
+```
+grant all on docker_laravel_test.* to docker;
+```
+### マイグレート
+```
+php artisan migrate --env=testing
 ```
 
 ## Viteセットアップ
