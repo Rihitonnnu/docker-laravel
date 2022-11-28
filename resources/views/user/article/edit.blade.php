@@ -20,6 +20,26 @@
                                         <div class="p-2 w-full">
                                             <div class="relative">
                                                 <div class="flex">
+                                                    <label for="tag"
+                                                        class="leading-7 text-sm text-gray-600">タグ選択</label>
+                                                    @if ($errors->has('tags'))
+                                                        <ul>
+                                                            <li class="text-red-500 ml-4 mt-1 text-sm">
+                                                                {{ $errors->first('tags') }}</li>
+                                                        </ul>
+                                                    @endif
+                                                </div>
+                                                <div class="flex flex-wrap">
+                                                    @foreach ($tags as $tag)
+                                                        <x-tag-checkbox name="{{ $tag->name }}"
+                                                            id="{{ $tag->id }}" checkedTag="{{ $article->tags->contains($tag->id) }}"/>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-2 w-full">
+                                            <div class="relative">
+                                                <div class="flex">
                                                     <label for="title" class="leading-7 text-sm text-gray-600">タイトル</label>
                                                     @if ($errors->has('title'))
                                                         <ul>
