@@ -37,6 +37,8 @@ jobs:
       run: |
         npm install
         npm run build
+    - name: Copy env.testing
+      run: cp .env.testing .env
     - name: Encryption Key generate
       run: php artisan key:generate --env=testing
     - name: Run Migrate
