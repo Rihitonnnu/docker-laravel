@@ -5,6 +5,7 @@ namespace Tests\Feature\Admin;
 use Tests\TestCase;
 use App\Models\Article;
 use App\Models\Admin;
+use App\Models\Tag;
 
 class ArticleControllerTest extends TestCase
 {
@@ -12,10 +13,11 @@ class ArticleControllerTest extends TestCase
     {
         parent::setUp();
         $this->admin = Admin::factory()->create();
+        $this->tag = Tag::factory()->create();
     }
 
     /**
-     * ユーザーの投稿と投稿者名の一覧が表示できているか
+     * 投稿のタイトル・投稿者名・タグが表示できているか
      * @test
      */
     public function ログインしていればユーザーの投稿一覧を表示()
@@ -23,11 +25,13 @@ class ArticleControllerTest extends TestCase
         $this->actingAs($this->admin, 'admins');
 
         $article = Article::factory()->create();
+        $article->tags()->sync([$this->tag->id]);
 
         $response = $this->get(route('admin.article.index'));
 
         $response->assertSeeText($article->title);
         $response->assertSeeText($article->user->name);
+        $response->assertSeeText($this->tag->name);
         $response->assertStatus(200);
     }
 
@@ -41,7 +45,7 @@ class ArticleControllerTest extends TestCase
     }
 
     /**
-     * 表示したい投稿・投稿者名が表示されているか、他の投稿が表示されていないか
+     * 表示したい投稿のタイトル・投稿者名・タグが表示されているか、他の投稿・投稿者名が表示されていないか
      * @test
      */
     public function ログインしていればユーザーの投稿詳細表示()
@@ -51,10 +55,13 @@ class ArticleControllerTest extends TestCase
         $article = Article::factory()->create();
         $otherArticle = Article::factory()->create();
 
+        $article->tags()->sync([$this->tag->id]);
+
         $response = $this->get(route('admin.article.show', ['article' => $article->id]));
 
         $response->assertSeeText($article->title);
         $response->assertSeeText($article->user->name);
+        $response->assertSeeText($this->tag->name);
 
         $response->assertDontSeeText($otherArticle->title);
         $response->assertDontSeeText($otherArticle->user->name);

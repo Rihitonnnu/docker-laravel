@@ -13,23 +13,28 @@ class ArticleControllerTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        $this->tag = Tag::factory()->create();
     }
 
     /**
+     * 自分の投稿のタイトル・タグが表示されているか、他人の投稿のタイトルが表示されていないか
      * @test
      */
     public function ログインしていれば自分が投稿した記事の一覧を表示する()
     {
         $this->actingAs($this->user, 'users');
 
-        $userArticle = Article::factory()->create(['user_id' => $this->user->id]); //自分の投稿分
-        $otherUserArticle = Article::factory()->create(['user_id' => User::factory()->create()->id]); //他のユーザーの投稿分
+        $article = Article::factory()->create(['user_id' => $this->user->id]); //自分の投稿分
+        $otherArticle = Article::factory()->create(['user_id' => User::factory()->create()->id]); //他のユーザーの投稿分
+
+        $article->tags()->sync([$this->tag->id]);
 
         $response = $this->get(route('user.article.index'));
 
         $response->assertStatus(200);
-        $response->assertSeeText($userArticle->title);
-        $response->assertDontSeeText($otherUserArticle->title);
+        $response->assertSeeText($article->title);
+        $response->assertSeeText($this->tag->name);
+        $response->assertDontSeeText($otherArticle->title);
 
         $response->assertViewIs('user.article.index');
     }
@@ -89,6 +94,7 @@ class ArticleControllerTest extends TestCase
     }
 
     /**
+     * 選択した自分の投稿のタイトル・タグが表示されているか、選択していない投稿・他のユーザーの投稿が表示されていないか
      * @test
      */
     public function ログインしていれば自分の投稿の詳細を表示する()
@@ -99,11 +105,14 @@ class ArticleControllerTest extends TestCase
         $otherArticle = Article::factory()->create(['user_id' => $this->user->id]); //自分の投稿、表示しない
         $otherUserArticle = Article::factory()->create(); //他の人の投稿、表示しない
 
+        $article->tags()->sync([$this->tag->id]);
+
         $response = $this->get(route('user.article.show', ['article' => $article->id]));
 
         $response->assertSeeText($article->title);
-        $response->assertDontSeeText($otherArticle);
-        $response->assertDontSeeText($otherUserArticle);
+        $response->assertSeeText($this->tag->name);
+        $response->assertDontSeeText($otherArticle->title);
+        $response->assertDontSeeText($otherUserArticle->title);
         $response->assertStatus(200);
     }
 
