@@ -84,7 +84,10 @@ class ArticleController extends Controller
         $title = $request->title;
         /** @var string $content */
         $content = $request->content;
-        $this->article->updateArticle($title, $content, $article->id);
+        /** @var array $tags */
+        $tags = $request->tags;
+
+        $this->article->updateArticle($title, $content, $article->id, $tags);
         return to_route('user.article.index');
     }
 
