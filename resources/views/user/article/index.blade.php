@@ -17,6 +17,11 @@
                                 <div class="pt-2 pb-9 flex items-center w-full">
                                     <div class="md:flex-grow w-11/12">
                                         <h2 class="text-2xl font-medium text-gray-900 title-font">{{ $article->title }}</h2>
+                                        <div class="flex mb-2 mt-1">
+                                            @foreach($article->tags as $tag)
+                                                <p class="mr-3 text-sm text-blue-600">#{{ $tag->name }}</p>
+                                            @endforeach
+                                        </div>
                                         <span class="text-gray-500 text-sm">投稿日 {{\Carbon\Carbon::parse($article->created_at)}}</span>
                                         <p class="leading-relaxed mt-4">{{Str::limit($article->content, 200, '...') }}</p>
                                     </div>
