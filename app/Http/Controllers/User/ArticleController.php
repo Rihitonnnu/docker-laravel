@@ -24,7 +24,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('user.article.index', ['articles' => Article::where('user_id', Auth::id())->with('tags')->get()]);
+        return view('user.article.index', ['articles' => Article::where('user_id', Auth::id())->orderBy('created_at','desc')->with('tags')->get()]);
     }
 
     /**
