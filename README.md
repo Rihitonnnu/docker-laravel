@@ -50,7 +50,7 @@ $ php artisan key:generate --env=testing
 ```
 $ docker compose exec db bash
 ```
-### MySQLにログイン(rootユーザー)
+### MySQLにログイン(pwはroot)
 ```
 $ mysql -u root -p
 ```
