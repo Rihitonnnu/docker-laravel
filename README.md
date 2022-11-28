@@ -35,6 +35,38 @@ $ php artisan key:generate
 ```
 $ php artisan migrate:fresh --seed
 ```
+
+## テスト環境セットアップ
+
+### キャッシュクリア
+```
+$ php artisan config:clear
+```
+### 認証キー作成
+```
+$ php artisan key:generate --env=testing
+```
+### dbコンテナに入る
+```
+$ docker compose exec db bash
+```
+### MySQLにログイン(pwはroot)
+```
+$ mysql -u root -p
+```
+### テスト用のデータベース作成
+```
+create database docker_laravel_test;
+```
+### DBの権限設定(pwはdocker)
+```
+grant all on docker_laravel_test.* to docker;
+```
+### マイグレート
+```
+php artisan migrate --env=testing
+```
+
 ## Viteセットアップ
 ### npmインストール
 ```
@@ -49,4 +81,5 @@ $ npm run dev
 #本番環境用
 $ npm run build
 ```
+
 

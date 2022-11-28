@@ -15,7 +15,7 @@ jobs:
         image: mysql:8.0.30
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: docker-database
+          MYSQL_DATABASE: docker_laravel_test
           MYSQL_USER: docker
           MYSQL_PASSWORD: docker
         ports:
@@ -37,14 +37,14 @@ jobs:
       run: |
         npm install
         npm run build
-    - name: Copy env
-      run: cp .env.example .env
+    - name: Copy env.testing
+      run: cp .env.testing .env
     - name: Encryption Key generate
-      run: php artisan key:generate
+      run: php artisan key:generate --env=testing
     - name: Run Migrate
       env:
         DB_HOST: 127.0.0.1
-      run: php artisan migrate
+      run: php artisan migrate --env=testing
     - name: Run PHPUnit
       env:
         DB_HOST: 127.0.0.1
