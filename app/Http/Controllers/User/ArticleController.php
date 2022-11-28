@@ -24,7 +24,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('user.article.index', ['articles' => Article::where('user_id', Auth::id())->orderBy('created_at','desc')->with('tags')->get()]);
+        return view('user.article.index', ['articles' => Article::where('user_id', Auth::id())->orderBy('created_at', 'desc')->with('tags')->get()]);
     }
 
     /**
@@ -70,7 +70,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('user.article.edit', ['article' => $article]);
+        return view('user.article.edit', ['article' => $article::where('id', $article->id)->with('tags')->first(), 'tags' => Tag::all()]);
     }
 
     /**
