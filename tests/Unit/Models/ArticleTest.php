@@ -13,25 +13,26 @@ class ArticleTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        $this->tag = Tag::factory()->create();
     }
 
     public function test_storeArticle()
     {
-        $tag = Tag::factory()->create();
-        $article = (new Article())->storeArticle($this->user->id, 'ほげほげ', 'ふがふが', [$tag->id]);
+        $article = (new Article())->storeArticle($this->user->id, 'ほげほげ', 'ふがふが', [$this->tag->id]);
 
         $this->assertEquals($this->user->id, $article->user_id);
         $this->assertEquals('ほげほげ', $article->title);
         $this->assertEquals('ふがふが', $article->content);
-        $this->assertEquals($tag->id, $article->tags->first()->id);
+        $this->assertEquals($this->tag->id, $article->tags->first()->id);
     }
 
     public function test_updateArticle()
     {
-        $updateArticle = (new Article())->updateArticle('タイトル', '本文', Article::factory()->create()->id);
+        $article = (new Article())->updateArticle('タイトル', '本文', Article::factory()->create()->id, [$this->tag->id]);
 
-        $this->assertEquals('タイトル', $updateArticle->title);
-        $this->assertEquals('本文', $updateArticle->content);
+        $this->assertEquals('タイトル', $article->title);
+        $this->assertEquals('本文', $article->content);
+        $this->assertEquals($this->tag->id, $article->tags->first()->id);
     }
 
     public function test_destroyArticle()
