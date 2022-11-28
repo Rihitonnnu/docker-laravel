@@ -18,6 +18,11 @@
                                             <p>{{ $article->user->name }}</p>
                                         </div>
                                         <h1 class="font-bold text-3xl text-black">{{ $article->title }}</h1>
+                                        <div class="flex mb-2 mt-1">
+                                            @foreach($article->tags as $tag)
+                                                <p class="mr-3 text-sm text-blue-600">#{{ $tag->name }}</p>
+                                            @endforeach
+                                        </div>
                                         <p class="text-sm mt-1">投稿日時 {{ $article->created_at }}</p>
                                         <div class="mt-4">
                                             {{-- 改行した状態で内容を表示するため改行のみエスケープ処理を無効化 --}}
