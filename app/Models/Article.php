@@ -58,13 +58,14 @@ class Article extends Model
      * @param integer $id
      * @return \App\Models\Article
      */
-    public function updateArticle(string $title, string $content, int $id)
+    public function updateArticle(string $title, string $content, int $id, array $tags)
     {
         $article = $this::find($id);
         $article->fill([
             'title' => $title,
             'content' => $content,
         ])->save();
+        $article->tags()->sync($tags);
         return $article;
     }
 

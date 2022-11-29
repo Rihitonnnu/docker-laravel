@@ -26,6 +26,7 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'required|max:50',
             'content' => 'required|max:1000',
+            'tags' => 'required|max:5',
         ];
     }
 
@@ -36,6 +37,8 @@ class UpdateRequest extends FormRequest
             'title.max' => 'タイトルは50文字以内で入力してください',
             'content.required' => '本文を入力して下さい',
             'content.max' => '本文は1000文字以内で入力してください',
+            'tags.required' => 'タグは1つ以上選択して下さい',
+            'tags.max' => 'タグ数は5つ以下にして下さい',
         ];
     }
 }

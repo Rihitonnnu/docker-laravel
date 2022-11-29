@@ -161,6 +161,7 @@ class ArticleControllerTest extends TestCase
             'title' => 'タイトル',
             'content' => '本文',
             'article' => Article::factory()->create(['user_id' => $this->user->id])->id,
+            'tags' => [$this->tag->id],
         ]));
         $response->assertRedirect(route('user.article.index'));
     }
@@ -174,6 +175,7 @@ class ArticleControllerTest extends TestCase
             'title' => 'タイトル',
             'content' => '本文',
             'article' => Article::factory()->create(['user_id' => $this->user->id])->id,
+            'tags' => [$this->tag->id],
         ]));
         $response->assertRedirect(route('user.login'));
     }

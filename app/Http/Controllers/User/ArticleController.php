@@ -24,7 +24,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('user.article.index', ['articles' => Article::where('user_id', Auth::id())->orderBy('created_at','desc')->with('tags')->get()]);
+        return view('user.article.index', ['articles' => Article::where('user_id', Auth::id())->orderBy('created_at', 'desc')->with('tags')->get()]);
     }
 
     /**
@@ -70,7 +70,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('user.article.edit', ['article' => $article]);
+        return view('user.article.edit', ['article' => $article::where('id', $article->id)->with('tags')->first(), 'tags' => Tag::all()]);
     }
 
     /**
@@ -84,7 +84,10 @@ class ArticleController extends Controller
         $title = $request->title;
         /** @var string $content */
         $content = $request->content;
-        $this->article->updateArticle($title, $content, $article->id);
+        /** @var array $tags */
+        $tags = $request->tags;
+
+        $this->article->updateArticle($title, $content, $article->id, $tags);
         return to_route('user.article.index');
     }
 
