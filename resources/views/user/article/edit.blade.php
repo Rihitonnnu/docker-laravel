@@ -32,7 +32,7 @@
                                                 <div class="flex flex-wrap">
                                                     @foreach ($tags as $tag)
                                                         <x-tag-checkbox name="{{ $tag->name }}"
-                                                            id="{{ $tag->id }}" checkedTag="{{ $article->tags->contains($tag->id) }}"/>
+                                                            id="{{ $tag->id }}" isChecked="{{ $article->tags->contains($tag->id) }}"/>
                                                     @endforeach
                                                 </div>
                                             </div>
