@@ -3,11 +3,19 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex h-16">
             <div class="flex w-full">
-                <!-- Logo --> 
+                
                 <div class="flex w-full items-center">
+                    <!-- Logo -->
                     <a href="{{ route('visitor.article.index') }}">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('visitor.article.index')" :active="request()->routeIs('visitor.article.index')">
+                            投稿一覧
+                        </x-nav-link>
+                    </div>
+
                     <div class="ml-auto flex">
                         <div>
                             <x-anchor-button route="{{ route('user.login') }}" title="ユーザーログイン" class="bg-indigo-500 hover:bg-indigo-600" />
