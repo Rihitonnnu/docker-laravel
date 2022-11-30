@@ -35,7 +35,7 @@
                     </section>
                     <div class="flex justify-center">
                         <div class="m-2 w-32 mt-6">
-                            <x-anchor-button route="{{ route('visitor.article.index') }}" title="一覧へ戻る" class="bg-indigo-500 hover:bg-indigo-600" />
+                            <x-back-button title="戻る" class="bg-indigo-500 hover:bg-indigo-600" />
                         </div>
                     </div>
                 </div>
