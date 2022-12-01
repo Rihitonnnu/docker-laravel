@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="px-6 pb-6 bg-white border-b border-gray-200">
-                    <form action="{{ route('visitor.article.search') }}" method="post" class="w-full">
+                    <form action="{{ route('visitor.tag.search') }}" method="post" class="w-full">
                         @csrf
                         <div class="my-8 w-5/6 mx-auto">
                             <div class="flex">
