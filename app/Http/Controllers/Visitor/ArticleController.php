@@ -38,6 +38,8 @@ class ArticleController extends Controller
         /** @var string $keyword */
         $keyword = $request->keyword;
 
-        return view('visitor.article.search', ['articles' => Article::search(new TagsSearch())->paginate(10), 'keyword' => $keyword]);
+        $articles = (new Article())->search(new TagsSearch())->paginate(10);
+
+        return view('visitor.article.search', ['articles' => $articles, 'keyword' => $keyword]);
     }
 }
