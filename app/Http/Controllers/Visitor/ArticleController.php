@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Visitor;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Search\TagsSearch;
-use App\Http\Requests\SearchRequest;
 
 class ArticleController extends Controller
 {
@@ -14,7 +13,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('visitor.article.index', ['articles' => Article::with(['user', 'tags'])->orderBy('created_at', 'desc')->paginate(20)]);
+        $articles = Article::with(['user', 'tags'])
+            ->search(new TagsSearch())
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+        return view('visitor.article.index', ['articles' => $articles]);
     }
 
     /**
@@ -27,19 +30,5 @@ class ArticleController extends Controller
         $article = Article::with(['tags', 'user'])->where('id', $id)->first();
 
         return view('visitor.article.show', ['article' => $article]);
-    }
-
-    /**
-     * @param SearchRequest $request
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function searchArticle(SearchRequest $request)
-    {
-        /** @var string $keyword */
-        $keyword = $request->keyword;
-
-        $articles = (new Article())->search(new TagsSearch())->paginate(10);
-
-        return view('visitor.article.search', ['articles' => $articles, 'keyword' => $keyword]);
     }
 }
