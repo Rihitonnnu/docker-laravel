@@ -63,14 +63,14 @@ class ArticleControllerTest extends TestCase
      * 検索した投稿のタイトルが表示され、検索していないものは表示されていないか
      * @test
      */
-    public function 投稿の検索結果を表示()
+    public function 投稿の検索結果の一覧を表示()
     {
         $tag = Tag::factory()->create(['name' => 'ほげほげ']);
         $article = Article::factory()->create();
         $otherArticle = Article::factory()->create();
         $article->tags()->sync([$tag->id]);
 
-        $response=$this->get(route('visitor.article.search',['keyword' => 'ほげほげ']));
+        $response = $this->get(route('visitor.article.index', ['keyword' => 'ほげほげ']));
 
         $response->assertStatus(200);
         $response->assertSeeText($article->title);
