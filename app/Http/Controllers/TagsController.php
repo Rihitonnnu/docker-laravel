@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Search\QueryParser;
 use App\Search\TagsSearch;
 
-class TagsSearchController extends Controller
+class TagsController extends Controller
 {
     /**
      * @return \Illuminate\Http\RedirectResponse
@@ -13,6 +13,6 @@ class TagsSearchController extends Controller
     public function search()
     {
         $query = QueryParser::parse(new TagsSearch());
-        return to_route('visitor.article.search', $query);
+        return to_route('visitor.article.index', $query);
     }
 }
