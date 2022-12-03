@@ -12,10 +12,9 @@ class TagsSearch extends Searchable
             'keyword' => [
                 'type' => 'callback',
                 'operator' => '=',
-                'method' => function ($builder, $key, $value) {
-                    $keyword = mb_convert_kana($value, 'Hc');
+                'method' => function ($builder, $key, $keyword) {
                     $builder->whereHas('tags', function ($query) use ($keyword) {
-                        $query->where('name', $keyword);
+                        $query->where('name', 'like', '%' . $keyword . '%');
                     });
                 }
             ],
