@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Article
+ *
+ * @method \Illuminate\Database\Eloquent\Builder search(Searchable $search, $query = null)
+ */
 class Article extends Model
 {
     use HasFactory;

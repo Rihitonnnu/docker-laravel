@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            最新の投稿
+            検索結果
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="px-6 pb-6 bg-white border-b border-gray-200">
-                    <form action="{{ route('visitor.tag.search') }}" method="post" class="w-full">
+                    <form action="{{ route('visitor.tag.search') }}" method="post">
                         @csrf
                         <div class="my-8 w-5/6 mx-auto">
                             <div class="flex">
@@ -17,7 +17,8 @@
                                 @if ($errors->has('keyword'))
                                     <ul>
                                         <li class="text-red-500 ml-4 text-sm">
-                                            {{ $errors->first('keyword') }}</li>
+                                            {{ $errors->first('keyword') }}
+                                        </li>
                                     </ul>
                                 @endif
                             </div>
@@ -30,9 +31,7 @@
                             </div>
                         </div>
                     </form>
-                    <h2 class="text-2xl font-medium text-gray-900 title-font mb-4">
-                        {{ $keyword==NUll ? "" : $keyword."の検索結果" }}
-                    </h2>
+                    <h2 class="text-2xl font-medium text-gray-900 title-font mb-4">{{ $keyword . 'の検索結果' }}</h2>
                     @foreach ($articles as $article)
                         <section class="text-gray-600 body-font overflow-hidden border-t-2 border-gray-200">
                             <div class="container px-10 pt-8 mx-auto">
@@ -51,8 +50,11 @@
                                                     <p class="mr-3 text-sm text-blue-600">#{{ $tag->name }}</p>
                                                 @endforeach
                                             </div>
-                                            <span class="text-gray-500 text-sm">投稿日 {{ \Carbon\Carbon::parse($article->created_at) }}</span>
-                                            <p class="leading-relaxed mt-4">{{ Str::limit($article->content, 200, '...') }}</p>
+                                            <span class="text-gray-500 text-sm">投稿日
+                                                {{ \Carbon\Carbon::parse($article->created_at) }}</span>
+                                            <p class="leading-relaxed mt-4">
+                                                {{ Str::limit($article->content, 200, '...') }}
+                                            </p>
                                         </div>
                                     </div>
                                 </a>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db31fb87269683e81a99dd925649a721",
+    "content-hash": "b5469536f76232512bcd861e8de23574",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -587,6 +587,53 @@
                 }
             ],
             "time": "2022-02-20T15:07:15+00:00"
+        },
+        {
+            "name": "fusic/seaaaaarch",
+            "version": "0.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fusic/Seaaaaarch.git",
+                "reference": "ea886c555cbae758e6bcb2e9ae31f0bb4cd5a227"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fusic/Seaaaaarch/zipball/ea886c555cbae758e6bcb2e9ae31f0bb4cd5a227",
+                "reference": "ea886c555cbae758e6bcb2e9ae31f0bb4cd5a227",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^6.20.14|^7.30.6|^8.0|^9.0",
+                "php": "^7.1.3|^7.2|^7.2.5|^7.3|^8.0"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "^1.1",
+                "orchestra/testbench": "^3.5|^6.9|^7.0",
+                "phpunit/phpunit": "^7.5|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Search\\Providers\\SearchServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Search\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "search",
+            "support": {
+                "issues": "https://github.com/fusic/Seaaaaarch/issues",
+                "source": "https://github.com/fusic/Seaaaaarch/tree/0.10.0"
+            },
+            "time": "2022-05-06T09:15:42+00:00"
         },
         {
             "name": "graham-campbell/result-type",

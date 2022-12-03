@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TagsController;
 use App\Http\Controllers\Visitor\ArticleController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ArticleController::class, 'index'])->name('visitor.article.index');
 
 Route::get('/show/{article}', [ArticleController::class, 'show'])->name('visitor.article.show');
+
+Route::post('/tags/search', [TagsController::class, 'search'])->name('visitor.tag.search');
