@@ -5,19 +5,20 @@ namespace App\Http\Controllers\Visitor;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Search\TagsSearch;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $articles = Article::with(['user', 'tags'])
             ->search(new TagsSearch())
             ->orderBy('created_at', 'desc')
             ->paginate(20);
-        return view('visitor.article.index', ['articles' => $articles]);
+        return view('visitor.article.index', ['articles' => $articles, 'keyword' => $request->query('keyword')]);
     }
 
     /**
