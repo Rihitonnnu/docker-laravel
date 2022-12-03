@@ -30,7 +30,9 @@
                             </div>
                         </div>
                     </form>
-                    <h2 class="text-2xl font-medium text-gray-900 title-font mb-4">{{ $keyword ?? '' }}</h2>
+                    <h2 class="text-2xl font-medium text-gray-900 title-font mb-4">
+                        {{ $keyword==NUll ? "" : $keyword."の検索結果" }}
+                    </h2>
                     @foreach ($articles as $article)
                         <section class="text-gray-600 body-font overflow-hidden border-t-2 border-gray-200">
                             <div class="container px-10 pt-8 mx-auto">
