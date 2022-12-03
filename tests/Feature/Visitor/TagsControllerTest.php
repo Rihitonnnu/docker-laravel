@@ -4,7 +4,7 @@ namespace Tests\Feature\Visitor;
 
 use Tests\TestCase;
 
-class TagsSearchControllerTest extends TestCase
+class TagsControllerTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -17,7 +17,7 @@ class TagsSearchControllerTest extends TestCase
      */
     public function 検索用のアクション()
     {
-        $response = $this->post(route('visitor.tag.search', ['keyword' => 'ほげほげ']));
-        $response->assertStatus(302);
+        $response = $this->get(route('visitor.article.index', ['keyword' => 'ほげほげ']));
+        $response->assertStatus(200);
     }
 }
