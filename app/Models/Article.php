@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Article
  *
- * @method \Illuminate\Database\Eloquent\Builder search($column, $operator = null, $value = null, $boolean = 'and')
+ * @method \Illuminate\Database\Eloquent\Builder search(Searchable $search, $query = null)
  */
 class Article extends Model
 {
